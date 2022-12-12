@@ -1,0 +1,65 @@
+{% extends "network/layout.html" %}
+{%  load static %}
+
+
+{% block body %}
+    <!-- profile page -->
+    <div>
+        <div>
+            {% if user.userProfile.Profile_pic %}
+                <img id="Profile_pic" src="{{ user.userProfile.Profile_pic.url }}" alt="image" width=100>
+            {% else %}
+                <img id="Profile_pic" src="{% static 'network/profile.png' %}" alt="image" width=100>
+            {% endif %}
+            <h1>{{ user }}</h1>
+            {% if request.user == user %}
+                <form action="{% url 'profile' request.user.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" name="image_file">
+                    <input id="submit_profile" type="submit">
+                </form>
+            {% endif %}
+            <div>
+                <p>Following: </p>
+            </div>
+            <div>
+                <p>Followers: </p>
+            </div>
+        </div>
+        <div>
+            <div>
+                {% if request.user != user and not check %}
+                    <form action="{% url 'follow' user.id %}">
+                    {% csrf_token %}
+                        <button>Follow</button>
+                    </form>
+                {% elif request.user != user and check %}
+                    <form action="{% url 'follow' user.id %}">
+                        {% csrf_token %}
+                            <button>Unfollow</button>
+                {% endif %}
+            </div>
+            {% for post in posts %}
+                <div><p>{{ post.users }}</p></div>
+                <div>
+                    <input type="button" class="edit_button"  value="Edit" name="edit" id="inbox_{{ post.id }}" data-id="{{ post.id }}">
+                </div>
+                <div id="div_{{ post.id }}">
+                    <p id="body_{{ post.id }}">{{ post.Inbox }}</p>
+                    {% if post.Image %}
+                        <img id="image_{{ post.id }}" src="{{ post.Image.url }}" alt="image" width=100>
+                    {% endif %}
+                        <div>
+                            {% if request.user in post.liked.all %}
+                                <button id="like_{{ post.id }}" data-id="{{ post.id }}"><i class="bi bi-hand-thumbs-up"></i>Unlike</button><div id="count_{{ post.id }}">{{ post.count }}</div>
+                            {% else %}
+                                <button id="like_{{ post.id }}" data-id="{{ post.id }}"><i class="bi bi-hand-thumbs-up"></i>Like</button><div id="count_{{ post.id }}">{{ post.count }}</div>
+                            {% endif %}
+                        </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- endprofile -->
+
+{% endblock %}

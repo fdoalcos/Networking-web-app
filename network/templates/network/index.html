@@ -1,0 +1,351 @@
+{% extends "network/layout.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+{% block body %}
+    <div class="main_flex">
+        <diV class="index__profile">
+            <div>
+                <div class="profile__marginpad">
+                    <div class="profile__head">
+                        <!-- box -->
+                    </div>
+                    <div class="profile__image ">
+                        <div class="profile__images">
+                            <!-- image -->
+                            {% if request.user.userProfile.Profile_pic %}
+                                <img class="profile__userimage rounded__circle" id="Profile_pic" src="{{ request.user.userProfile.Profile_pic.url }}" alt="image" width=70>
+                            {% else %}
+                                <img class="profile__userimage rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=70>
+                            {% endif %}
+                                </div>
+                        
+                    </div>
+                    <div class="profile__body">
+                        <!-- name -->
+                        <div>
+                            <p class="profile__users profile__user">{{ request.user }}</p>
+                            <p class="profile__users profile__email">@{{ request.user.email }}</p>
+                        </div>
+                        <!-- about (still need to add some features for about) -->
+                        <div class="profile__captions">
+                            <p class="profile__users profile__caption">I'd love to change the world, but they won’t give me the source code.</p>
+                        </div>
+                            <!-- followers (still need to add some count function on the followers)-->
+                        <div class="profile__follow">
+                            <div class="profile__bodyf profile__post">
+                                <p class="profile__number">15</p>
+                                <p class="profile__word">Posts</p>
+                            </div>
+                            <div class="div"></div>
+                            <div class="profile__bodyf profile__followers">
+                                <p class="profile__number">20</p>
+                                <p class="profile__word">Followers</p>
+                            </div>
+                            <div class="div"></div>
+                            <!-- following (still need to add some count functiom on the following)-->
+                            <div class="profile__bodyf profile__following">
+                                <p class="profile__number">10</p>
+                                <p class="profile__word">Following</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile__people">
+                    <!-- people you might know function -->
+                    <!-- still need to implement -->
+                    <h1 class="post__headline">Who to follow</h1>
+                    {% for user in users %}
+                        {% if request.user != user and user not in request.user.userProfile.Follow.all %}
+                            <div class="post__mainpeople">
+                                <div class="post__images">
+                                    {% if user.userProfile.Profile_pic %}
+                                        <img class="main__image rounded__circle" id="Profile_pic" src="{{ user.userProfile.Profile_pic.url }}" alt="image" width=50>
+                                    {% else %}
+                                        <img class="main__image rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
+                                    {% endif %}
+                                </div>
+                                <div class="post__name">
+                                    <a  class="post__username" href="{% url 'profile' user.id %}">                            <p>{{ user }}</p>
+                                    </a>
+                                    <p class="post__email">{{ user.email }}</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+        </diV>
+        <div class="index__main">
+            <div class="inbox__marginpad">
+                <div class="inbox__post">
+                    <!-- button for modal -->
+                    <div>
+                        <!-- <div class="inbox__parent"> -->
+                            
+                        <!-- </div> -->
+                        <!-- <div class="inbox-child">  -->
+                        <div class="inbox__start" >
+                            <div class="inbox__parent post__images">
+                                {% if request.user.userProfile.Profile_pic %}
+                                    <img class="main__image rounded__circle" id="Profile_pic" src="{{ request.user.userProfile.Profile_pic.url }}" alt="image" width=50>
+                                {% else %}
+                                    <img class="main__image rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
+                                {% endif %}
+                            </div>
+                            <diV class="inbox__child">
+                                <form>
+                                    {% render_field form.Inbox class="inbox__main" placeholder="Share your thoughts" type="textarea" data-bs-toggle="modal" data-bs-target="#staticBackdrop" %}
+                                </form>
+                            </diV>
+                            
+                            <!-- <button type="button" class="button__inbox" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                                Share your thoughts...
+                            </button> -->
+                        </div>
+                    </div>
+                    <!-- form pop up -->
+                    <!-- Modal for post -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Create post</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- body of modals -->
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="inbox__parent post__images">
+                                        {% if request.user.userProfile.Profile_pic %}
+                                            <img class="main__image rounded__circle" id="Profile_pic" src="{{ request.user.userProfile.Profile_pic.url }}" alt="image" width=50>
+                                        {% else %}
+                                            <img class="main__image rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
+                                        {% endif %}
+                                    </div>
+                                    <div class="inbox__child">
+                                        {% render_field form.Inbox autofocus="autofocus" class="inbox__form"  tabindex="1" placeholder="Share your thoughts" type="textarea" %}
+                                    </div>
+                                    <div class="inbox__header">
+                                        <p class="inbox__title">Add attachment (optional)</p>
+                                    </div>
+                                    <!-- <label>
+                                        
+                                    </label> -->
+                                    <div class="inbox__filemargin">
+                                        <label class="inbox__label" for="input__file">
+                                            {% render_field form.Image id="input__file" style="display: none;" class="inbox__image inbox__file" %}
+                                            <i class="bi bi-images image__tag"></i>
+                                            <label id="image__filename" for="input__file" class="input__label">                                        
+                                                Drag here or click to upload photo
+                                            </label> 
+                                        </label>
+                                    </div>
+                                    <div class="modal-footer modal-below">
+                                        <button type="button" class="button btn__danger" data-bs-dismiss="modal">Close</button>                                    
+                                        <input id="submit_inbox" type="submit" class="button btn__success">
+                                    </div>
+                                </form>
+                                <!-- endbody -->
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- endform pop up -->
+                </div>
+            </div>
+            
+            <!-- start of inbox -->
+            <div>
+                {% for inbox in Posts %}
+                <div class="inbox__pad">
+                    <div class="inbox__inbox">
+                        <div class="post__main">
+                            <div class="post__images">
+                                {% if inbox.users.userProfile.Profile_pic %}
+                                    <img class="main__image rounded__circle" id="Profile_pic" src="{{ inbox.users.userProfile.Profile_pic.url }}" alt="image" width=50>
+                                {% else %}
+                                    <img class="main__image rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
+                                {% endif %}
+                            </div>
+                            <div class="post__name">
+                                <a  class="post__username" href="{% url 'profile' inbox.users.id %}">{{ inbox.users }}</a>
+                                <p class="post__calendar">10 November at 10:22</p>
+                            </div>
+                            <div class="post__edit">
+                                    <!-- <input type="button" class="edit__button"  value="Edit" name="edit" id="inbox_{{ inbox.id }}" data-id="{{ inbox.id }}" data-bs-toggle="modal" data-bs-target="#staticBackdropedit{{ inbox.id }}"> -->
+                                    <!-- edit button dropdown -->
+                                    <div class="btn-group edit__button">
+                                        <button class="edit__buttondropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        ...
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            {% if inbox.users == request.user %}
+                                                <li class="dropdown-item" id="inbox_{{ inbox.id }}" data-id="{{ inbox.id }}" data-bs-toggle="modal" data-bs-target="#staticBackdropedit{{ inbox.id }}">Edit post</li>
+                                            {% else %}
+                                                <li class="dropdown-item">Cannot edit post</li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                    <!-- end button -->
+                            </div>
+                        </div>
+                        <div class="post__body">
+                            <div class="post__content">
+                                <p id="body_{{ inbox.id }}">{{ inbox.Inbox }}</p>
+                                {% if inbox.Image %}
+                                    <img class="post__imagepost" id="image_{{ inbox.id }}" src="{{ inbox.Image.url }}" alt="image" width=100>
+                                {% endif %}
+                            </div>
+                            <div class="post__info" id="count_{{ inbox.id }}">
+                                {% if inbox.count != 0 %}
+                                    <img src="https://static-exp1.licdn.com/sc/h/8ekq8gho1ruaf8i7f86vd1ftt" style="width: 20px;"alt="like-image"> {{ inbox.count }}
+                                {% endif %}
+                            </div>
+                                    
+                        </div>
+                    </div>
+                    <div class="main__headerpad">
+                        <div id="main__header" class="main__header" style="border-top-style: none;">
+                            <div class="post__header">
+                                <div class="post__like">
+                                    {% if request.user in inbox.liked.all %}
+                                        <button class="inbox__like liked" id="like_{{ inbox.id }}" data-id="{{ inbox.id }}"><i class="inbox__tag bi bi-hand-thumbs-up-fill"></i>Unlike</button>
+                                    {% else %}
+                                        <button class="inbox__like" id="like_{{ inbox.id }}" data-id="{{ inbox.id }}"><i class="inbox__tag bi bi-hand-thumbs-up"></i>Like</button>
+                                    {% endif %}
+                                </div>
+                                <div class="post__comment">
+                                    <!-- <input class="inbox__comment" id="post__comment" type="button" value="comment"><i class="bi bi-chat"></i> -->
+                                    <button class="inbox__comment" id="post__comment"><i class="inbox__tag bi bi-chat"></i>Comment</button>
+
+                                </div>  
+                            </div>
+                        </div>
+                        <!-- start of comment -->
+                <div id="start-comment" style="display: none;">
+                    <div class="main__comment" style="border-top-style: none;">
+                        <div class="comment__main">
+                            <div class="comment__image comment__images">
+                                {% if request.user.userProfile.Profile_pic %}
+                                    <img class="main__image rounded__circle" id="Profile_pic" src="{{ request.user.userProfile.Profile_pic.url }}" alt="image" width=50>
+                                {% else %}
+                                    <img class="main__image rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
+                                {% endif %}
+                            </div>
+                            <div class="post__commentForm">
+                                {% render_field forms.comment id="post__commentform" class="post__commentform" placeholder="Add a comment" data-id="{{ inbox.id }}" %}<p id="post__commentforminside"style="display: none;">{{ inbox.id }}</p>
+                                <!-- <input id="comment_{{ inbox.id }}" type="submit" hidden value="comment" data-id="{{ inbox.id }}" /> -->
+                            </div>
+                            <div>
+                                <input class="post__commentbutton" name="post__commentbutton" id="comment_{{ inbox.id }}" type="submit" value="Post" data-id="{{ inbox.id }}">
+                            </div>
+                        </div>
+                        <div class="comment__content">
+                            <div class="post__commentBody" id="div_{{ inbox.id }}">
+                                <!-- actual comments api here -->
+                            </div>
+                            <div class="comment__body" id="comments_{{ inbox.id }}">
+                                {% for comment in inbox.comment_post.all %}
+                                        <div class="comment__flex">
+                                            <div class="comment__image post__images">
+                                                {% if comment.username.userProfile.Profile_pic %}
+                                                    <img class="main__image rounded__circle" id="Profile_pic" src="{{ comment.username.userProfile.Profile_pic.url }}" alt="image" width=50>
+                                                {% else %}
+                                                    <img class="main__image rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
+                                                {% endif %}
+                                            </div>
+                                            <div class="comment__contents">
+                                                <p class="comment__user" id="comment_user">{{ comment.username }}</p>
+                                                <p class="comment__comment" id="comment_comment">{{ comment.comment }}</p>
+                                            </div>
+                                        </div>
+                                {% endfor  %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    </div>    
+                    <!-- end of inbox -->
+                </div>
+                <!-- modal for edit -->
+            <div class="modal fade" id="staticBackdropedit{{ inbox.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="staticBackdropLabel">Edit Post</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="POST" class="edit__flex">
+                            <div class="post__images">
+                                {% if request.user.userProfile.Profile_pic %}
+                                    <img class="main__image rounded__circle" id="Profile_pic" src="{{ request.user.userProfile.Profile_pic.url }}" alt="image" width=50>
+                                {% else %}
+                                    <img class="main__image rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <textarea class="edit__textarea" id="edit__textarea_{{ inbox.id }}" placeholder="edit here"></textarea>
+                            </div>
+                        </form>
+                        <div class="modal-footer modal-below-edit">
+                            <button type="button" class="button btn__danger" data-bs-dismiss="modal">Cancel</button>                                    
+                            <input id="edit__button_{{ inbox.id }}" type="submit" value="Save" data-bs-dismiss="modal" class="button btn__success">
+                        </div>
+                    </div>
+                    
+                  </div>
+                </div>
+            </div>
+            <!-- end modal -->
+            {% endfor %}
+            </div>
+        </div>
+        <div class="news__main">
+            <div class="main__body">
+                <h1 class="news__headline">Today's top news</h1>
+                <div id="news_body" class="news__body">
+                    <!-- actual news api here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <nav aria-label="...">
+            <ul class="pagination">
+
+                {% if Posts.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ venues.previous_page_number }}">Previous</a></li>
+
+                {% else %}
+                    <li class="page-item disabled"><a class="page-link" href="?page={{ venues.previous_page_number }}">Previous</a></li>
+                {% endif  %}
+
+                {% for i in nums %}
+
+                    {% if forloop.counter == Posts.number %}
+                        <li class="page-item active"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+                    {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+                    {% endif %}
+
+                {% endfor %}
+
+                {% if Posts.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ Posts.next_page_number }}">Next</a></li>
+                {% endif %}
+
+            </ul>
+        </nav>
+    </div>
+   
+
+
+
+{% endblock %}
