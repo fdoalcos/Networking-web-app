@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // by default, landing page should be default
     load_landingpage('all__post')
-
+    
 
     document.addEventListener('click', event => {
 
@@ -234,9 +234,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (element.id.startsWith('post__')) {
-            // console.log("I'm clicked!")
+            let id = element.dataset.id
+            console.log(`I'm clicked ${id}`)
             let maindiv = document.getElementById("main__header")
-            let div = document.getElementById("start-comment")
+            let div = document.getElementById(`start-comment_${id}`)
             div.style.display = "block";
             maindiv.style.borderRadius = 0;
         }

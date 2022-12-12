@@ -222,13 +222,13 @@
                                 </div>
                                 <div class="post__comment">
                                     <!-- <input class="inbox__comment" id="post__comment" type="button" value="comment"><i class="bi bi-chat"></i> -->
-                                    <button class="inbox__comment" id="post__comment"><i class="inbox__tag bi bi-chat"></i>Comment</button>
+                                    <button class="inbox__comment" id="post__comment" data-id="{{ inbox.id }}"><i class="inbox__tag bi bi-chat"></i>Comment</button>
 
                                 </div>  
                             </div>
                         </div>
                         <!-- start of comment -->
-                        <div id="start-comment" style="display: none;">
+                        <div id="start-comment_{{ inbox.id }}" style="display: none;">
                             <div class="main__comment" style="border-top-style: none;">
                                 <div class="comment__main">
                                     <div class="comment__image comment__images">

@@ -76,8 +76,8 @@
                             <div class="profile__image ">
                                 <div class="profile__images">
                                     <!-- image -->
-                                    {% if request.user.userProfile.Profile_pic %}
-                                        <img class="profile__userimage rounded__circle" id="Profile_pic" src="{{ request.user.userProfile.Profile_pic.url }}" alt="image" width=70>
+                                    {% if user.userProfile.Profile_pic %}
+                                        <img class="profile__userimage rounded__circle" id="Profile_pic" src="{{ user.userProfile.Profile_pic.url }}" alt="image" width=70>
                                     {% else %}
                                         <img class="profile__userimage rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=70>
                                     {% endif %}
@@ -87,8 +87,8 @@
                             <div class="profile__body">
                                 <!-- name -->
                                 <div>
-                                    <p class="profile__users profile__user">{{ request.user }}</p>
-                                    <p class="profile__users profile__email">@{{ request.user.email }}</p>
+                                    <p class="profile__users profile__user">{{ user }}</p>
+                                    <p class="profile__users profile__email">@{{ user.email }}</p>
                                 </div>
                                 <!-- about (still need to add some features for about) -->
                                 <div class="profile__captions">
@@ -142,85 +142,96 @@
                 </diV>
                 <div class="index__main">
                     {% if request.user == user%}
-                    <div class="inbox__marginpad">
-                        <div class="inbox__post">
-                            <!-- button for modal -->
-                            <div>
-                                <!-- <div class="inbox__parent"> -->
-                                    
-                                <!-- </div> -->
-                                <!-- <div class="inbox-child">  -->
-                                <div class="inbox__start" >
-                                    <div class="inbox__parent post__images">
-                                        {% if request.user.userProfile.Profile_pic %}
-                                            <img class="main__image rounded__circle" id="Profile_pic" src="{{ request.user.userProfile.Profile_pic.url }}" alt="image" width=50>
-                                        {% else %}
-                                            <img class="main__image rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
-                                        {% endif %}
+                        <div class="inbox__marginpad">
+                            <div class="inbox__post">
+                                <!-- button for modal -->
+                                <div>
+                                    <!-- <div class="inbox__parent"> -->
+                                        
+                                    <!-- </div> -->
+                                    <!-- <div class="inbox-child">  -->
+                                    <div class="inbox__start" >
+                                        <div class="inbox__parent post__images">
+                                            {% if request.user.userProfile.Profile_pic %}
+                                                <img class="main__image rounded__circle" id="Profile_pic" src="{{ request.user.userProfile.Profile_pic.url }}" alt="image" width=50>
+                                            {% else %}
+                                                <img class="main__image rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
+                                            {% endif %}
+                                        </div>
+                                        <diV class="inbox__child">
+                                            <form>
+                                                {% render_field form.Inbox class="inbox__main" placeholder="Share your thoughts" type="textarea" data-bs-toggle="modal" data-bs-target="#staticBackdrop" %}
+                                            </form>
+                                        </diV>
+                                        
+                                        <!-- <button type="button" class="button__inbox" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+                                            Share your thoughts...
+                                        </button> -->
                                     </div>
-                                    <diV class="inbox__child">
-                                        <form>
-                                            {% render_field form.Inbox class="inbox__main" placeholder="Share your thoughts" type="textarea" data-bs-toggle="modal" data-bs-target="#staticBackdrop" %}
-                                        </form>
-                                    </diV>
-                                    
-                                    <!-- <button type="button" class="button__inbox" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
-                                        Share your thoughts...
-                                    </button> -->
                                 </div>
-                            </div>
-                            <!-- form pop up -->
-                            <!-- Modal for post -->
-                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Create post</h5>
-                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <!-- body of modals -->
-                                        <form action="" method="post" enctype="multipart/form-data">
-                                            {% csrf_token %}
-                                            <div class="inbox__parent post__images">
-                                                {% if request.user.userProfile.Profile_pic %}
-                                                    <img class="main__image rounded__circle" id="Profile_pic" src="{{ request.user.userProfile.Profile_pic.url }}" alt="image" width=50>
-                                                {% else %}
-                                                    <img class="main__image rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
-                                                {% endif %}
-                                            </div>
-                                            <div class="inbox__child">
-                                                {% render_field form.Inbox autofocus="autofocus" class="inbox__form"  tabindex="1" placeholder="Share your thoughts" type="textarea" %}
-                                            </div>
-                                            <div class="inbox__header">
-                                                <p class="inbox__title">Add attachment (optional)</p>
-                                            </div>
-                                            <!-- <label>
+                                <!-- form pop up -->
+                                <!-- Modal for post -->
+                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle">Create post</h5>
+                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- body of modals -->
+                                            <form action="" method="post" enctype="multipart/form-data">
+                                                {% csrf_token %}
+                                                <div class="inbox__parent post__images">
+                                                    {% if request.user.userProfile.Profile_pic %}
+                                                        <img class="main__image rounded__circle" id="Profile_pic" src="{{ request.user.userProfile.Profile_pic.url }}" alt="image" width=50>
+                                                    {% else %}
+                                                        <img class="main__image rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="inbox__child">
+                                                    {% render_field form.Inbox autofocus="autofocus" class="inbox__form"  tabindex="1" placeholder="Share your thoughts" type="textarea" %}
+                                                </div>
+                                                <div class="inbox__header">
+                                                    <p class="inbox__title">Add attachment (optional)</p>
+                                                </div>
+                                                <!-- <label>
+                                                    
+                                                </label> -->
                                                 
-                                            </label> -->
-                                            <div class="inbox__filemargin">
-                                                <label class="inbox__label" for="input__file">
-                                                    {% render_field form.Image id="input__file" style="display: none;" class="inbox__image inbox__file" %}
-                                                    <i class="bi bi-images image__tag"></i>
-                                                    <label id="image__filename" for="input__file" class="input__label">                                        
-                                                        Drag here or click to upload photo
-                                                    </label> 
-                                                </label>
-                                            </div>
-                                            <div class="modal-footer modal-below">
-                                                <button type="button" class="button btn__danger" data-bs-dismiss="modal">Close</button>                                    
-                                                <input id="submit_inbox" type="submit" class="button btn__success">
-                                            </div>
-                                        </form>
-                                        <!-- endbody -->
+                                                <div class="inbox__filemargin">
+                                                    <label class="inbox__label" for="input__file">
+                                                        {% render_field form.Image id="input__file" style="display: none;" class="inbox__image inbox__file" %}
+                                                        <i class="bi bi-images image__tag"></i>
+                                                        <label id="image__filename" for="input__file" class="input__label">                                        
+                                                            Drag here or click to upload photo
+                                                        </label> 
+                                                    </label>
+                                                </div>
+                                                <div class="modal-footer modal-below">
+                                                    <button type="button" class="button btn__danger" data-bs-dismiss="modal">Close</button>                                    
+                                                    <input id="submit_inbox" type="submit" class="button btn__success">
+                                                </div>
+                                            </form>
+                                            <!-- endbody -->
+                                        </div>
+                                    </div>
                                     </div>
                                 </div>
-                                </div>
+                                <!-- endform pop up -->
                             </div>
-                            <!-- endform pop up -->
                         </div>
+                    {% else %}
+                    <div class="inbox__filemargin" style="display: none;">
+                        <label class="inbox__label" for="input__file">
+                            {% render_field form.Image id="input__file" style="display: none;" class="inbox__image inbox__file" %}
+                            <i class="bi bi-images image__tag"></i>
+                            <label id="image__filename" for="input__file" class="input__label">                                        
+                                Drag here or click to upload photo
+                            </label> 
+                        </label>
                     </div>
                     {% endif %}
 
@@ -287,13 +298,13 @@
                                         </div>
                                         <div class="post__comment">
                                             <!-- <input class="inbox__comment" id="post__comment" type="button" value="comment"><i class="bi bi-chat"></i> -->
-                                            <button class="inbox__comment" id="post__comment"><i class="inbox__tag bi bi-chat"></i>Comment</button>
+                                            <button class="inbox__comment" id="post__comment" data-id="{{ inbox.id }}"><i class="inbox__tag bi bi-chat"></i>Comment</button>
         
                                         </div>  
                                     </div>
                                 </div>
                                 <!-- start of comment -->
-                                <div id="start-comment" style="display: none;">
+                                <div id="start-comment_{{ inbox.id }}" style="display: none;">
                                     <div class="main__comment" style="border-top-style: none;">
                                         <div class="comment__main">
                                             <div class="comment__image comment__images">
@@ -349,8 +360,8 @@
                             <div class="modal-body">
                                 <form action="" method="POST" class="edit__flex">
                                     <div class="post__images">
-                                        {% if request.user.userProfile.Profile_pic %}
-                                            <img class="main__image rounded__circle" id="Profile_pic" src="{{ request.user.userProfile.Profile_pic.url }}" alt="image" width=50>
+                                        {% if user.userProfile.Profile_pic %}
+                                            <img class="main__image rounded__circle" id="Profile_pic" src="{{ user.userProfile.Profile_pic.url }}" alt="image" width=50>
                                         {% else %}
                                             <img class="main__image rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
                                         {% endif %}
