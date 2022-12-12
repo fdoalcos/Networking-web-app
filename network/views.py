@@ -154,6 +154,9 @@ def profile(request, user_id):
     post = Post.objects.filter(users=user)
     profile = Profile.objects.get(id=user_id - 1)
     check = Profile.objects.filter(Follow=user).exists()
+    form = Inboxform()
+    commentform = Commentform()
+
 
     if request.method == "POST":
         if len(request.FILES) != 0:
@@ -164,6 +167,10 @@ def profile(request, user_id):
         "posts": post,
         "user": user,
         "check": check,
+        "form": form,
+        "forms": commentform,
+
+        
     })
 
 def follow(request, follow_id):

@@ -228,48 +228,48 @@
                             </div>
                         </div>
                         <!-- start of comment -->
-                <div id="start-comment" style="display: none;">
-                    <div class="main__comment" style="border-top-style: none;">
-                        <div class="comment__main">
-                            <div class="comment__image comment__images">
-                                {% if request.user.userProfile.Profile_pic %}
-                                    <img class="main__image rounded__circle" id="Profile_pic" src="{{ request.user.userProfile.Profile_pic.url }}" alt="image" width=50>
-                                {% else %}
-                                    <img class="main__image rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
-                                {% endif %}
-                            </div>
-                            <div class="post__commentForm">
-                                {% render_field forms.comment id="post__commentform" class="post__commentform" placeholder="Add a comment" data-id="{{ inbox.id }}" %}<p id="post__commentforminside"style="display: none;">{{ inbox.id }}</p>
-                                <!-- <input id="comment_{{ inbox.id }}" type="submit" hidden value="comment" data-id="{{ inbox.id }}" /> -->
-                            </div>
-                            <div>
-                                <input class="post__commentbutton" name="post__commentbutton" id="comment_{{ inbox.id }}" type="submit" value="Post" data-id="{{ inbox.id }}">
+                        <div id="start-comment" style="display: none;">
+                            <div class="main__comment" style="border-top-style: none;">
+                                <div class="comment__main">
+                                    <div class="comment__image comment__images">
+                                        {% if request.user.userProfile.Profile_pic %}
+                                            <img class="main__image rounded__circle" id="Profile_pic" src="{{ request.user.userProfile.Profile_pic.url }}" alt="image" width=50>
+                                        {% else %}
+                                            <img class="main__image rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
+                                        {% endif %}
+                                    </div>
+                                    <div class="post__commentForm">
+                                        {% render_field forms.comment id="post__commentform" class="post__commentform" placeholder="Add a comment" data-id="{{ inbox.id }}" %}<p id="post__commentforminside"style="display: none;">{{ inbox.id }}</p>
+                                        <!-- <input id="comment_{{ inbox.id }}" type="submit" hidden value="comment" data-id="{{ inbox.id }}" /> -->
+                                    </div>
+                                    <div>
+                                        <input class="post__commentbutton" name="post__commentbutton" id="comment_{{ inbox.id }}" type="submit" value="Post" data-id="{{ inbox.id }}">
+                                    </div>
+                                </div>
+                                <div class="comment__content">
+                                    <div class="post__commentBody" id="div_{{ inbox.id }}">
+                                        <!-- actual comments api here -->
+                                    </div>
+                                    <div class="comment__body" id="comments_{{ inbox.id }}">
+                                        {% for comment in inbox.comment_post.all %}
+                                                <div class="comment__flex">
+                                                    <div class="comment__image post__images">
+                                                        {% if comment.username.userProfile.Profile_pic %}
+                                                            <img class="main__image rounded__circle" id="Profile_pic" src="{{ comment.username.userProfile.Profile_pic.url }}" alt="image" width=50>
+                                                        {% else %}
+                                                            <img class="main__image rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="comment__contents">
+                                                        <p class="comment__user" id="comment_user">{{ comment.username }}</p>
+                                                        <p class="comment__comment" id="comment_comment">{{ comment.comment }}</p>
+                                                    </div>
+                                                </div>
+                                        {% endfor  %}
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="comment__content">
-                            <div class="post__commentBody" id="div_{{ inbox.id }}">
-                                <!-- actual comments api here -->
-                            </div>
-                            <div class="comment__body" id="comments_{{ inbox.id }}">
-                                {% for comment in inbox.comment_post.all %}
-                                        <div class="comment__flex">
-                                            <div class="comment__image post__images">
-                                                {% if comment.username.userProfile.Profile_pic %}
-                                                    <img class="main__image rounded__circle" id="Profile_pic" src="{{ comment.username.userProfile.Profile_pic.url }}" alt="image" width=50>
-                                                {% else %}
-                                                    <img class="main__image rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
-                                                {% endif %}
-                                            </div>
-                                            <div class="comment__contents">
-                                                <p class="comment__user" id="comment_user">{{ comment.username }}</p>
-                                                <p class="comment__comment" id="comment_comment">{{ comment.comment }}</p>
-                                            </div>
-                                        </div>
-                                {% endfor  %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
                     </div>    
                     <!-- end of inbox -->
                 </div>
