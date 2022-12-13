@@ -28,16 +28,19 @@
             </div>
         </div>
         <div>
+            <!-- still a bug -->
             <div>
                 {% if request.user != user and not check %}
                     <form action="{% url 'follow' user.id %}">
-                    {% csrf_token %}
+                        {% csrf_token %}
                         <button>Follow</button>
+                        <!-- <input type="submit" name="follow" value="Follow"> -->
                     </form>
                 {% elif request.user != user and check %}
                     <form action="{% url 'follow' user.id %}">
                         {% csrf_token %}
-                            <button>Unfollow</button>
+                        <button>Unfollow</button>
+                        <!-- <input type="submit" name="unfollow" value="Unfollow"> -->
                 {% endif %}
             </div>
             <!-- this is for news profile etc -->
@@ -314,13 +317,17 @@
                                                     <img class="main__image rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
                                                 {% endif %}
                                             </div>
-                                            <div class="post__commentForm">
-                                                {% render_field forms.comment id="post__commentform" class="post__commentform" placeholder="Add a comment" data-id="{{ inbox.id }}" %}<p id="post__commentforminside"style="display: none;">{{ inbox.id }}</p>
-                                                <!-- <input id="comment_{{ inbox.id }}" type="submit" hidden value="comment" data-id="{{ inbox.id }}" /> -->
-                                            </div>
-                                            <div>
-                                                <input class="post__commentbutton" name="post__commentbutton" id="comment_{{ inbox.id }}" type="submit" value="Post" data-id="{{ inbox.id }}">
-                                            </div>
+                                            <form novalidate>
+                                                <div class="post__commentForm">
+                                                    {% render_field forms.comment id="post__commentform" class="post__commentform" placeholder="Add a comment" data-id="{{ inbox.id }}" %}
+                                                    <p id="post__commentforminside"style="display: none;">{{ inbox.id }}</p>
+                                                    <!-- <input id="comment_{{ inbox.id }}" type="submit" hidden value="comment" data-id="{{ inbox.id }}" /> -->
+                                                </div>
+                                                <div>
+                                                    <input class="post__commentbutton" name="post__commentbutton" id="comment_{{ inbox.id }}" type="submit" value="Post" data-id="{{ inbox.id }}">
+                                                </div>
+                                            </form>
+                                            
                                         </div>
                                         <div class="comment__content">
                                             <div class="post__commentBody" id="div_{{ inbox.id }}">

@@ -186,7 +186,7 @@ def follow(request, follow_id):
     else:
         profile.Followers.add(user)
         profile2.Follow.add(following_user)
-
+    
     return HttpResponseRedirect(reverse('profile', args=[follow_id]))
 
 def unfollow(request, follow_id):

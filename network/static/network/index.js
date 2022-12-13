@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
         load_landingpage('all__post');
       });
 
+    document.getElementById("post__commentform").removeAttribute('required');
+
+
     // by default, landing page should be default
     load_landingpage('all__post')
     
