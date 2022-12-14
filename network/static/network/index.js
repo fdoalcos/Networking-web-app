@@ -197,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }
 
+
         if (element.id.startsWith('comment_')) {
             let id = element.dataset.id
             
@@ -222,11 +223,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             })
             .then(data => {
-                // console.log(data)
-                div.append(data.user + "\n")
-                div.appendChild(document.createElement("BR"));
-                div.append(data.comment + "\n")
-                div.appendChild(document.createElement("BR"));
+                console.log(data)
+                let div2  = document.createElement("div")
+                div2.innerHTML = `
+                    <div class="comment__flex">
+                        <div class="comment__image post__images">
+                            <img class="main__image rounded__circle" id="Profile_pic" src="${data.image}" alt="image" width=50>
+                           
+                        </div>
+                        <div class="comment__contents">
+                            <p class="comment__user" id="comment_user">${data.user}</p>
+                            <p class="comment__comment" id="comment_comment">${data.comment}</p>
+                        </div>
+                    </div>
+                    `
+
+                console.log(`this is ${div2}`)
+                div.append(div2)
+                
+                // div.append(data.user + "\n")
+                // div.appendChild(document.createElement("BR"));
+                // div.append(data.comment + "\n")
+                // div.appendChild(document.createElement("BR"));
             })
             
             document.getElementById(`post__commentform_${id}`).value = '';

@@ -230,8 +230,13 @@ def comment(request, comment_id):
         user = User.objects.get(id=request.user.id)
         comment = Comment(comment_post=post, username=request.user, comment=value)
         comment.save()
+        
+        try:
+            Image = user.userProfile.Profile_pic.url
+        except:
+            Image = "https://social.webestica.com/assets/images/avatar/placeholder.jpg"
 
-        return JsonResponse({'user': str(user), 'comment': value, 'success': "successful"}, status=200)
+        return JsonResponse({'user': str(user), 'image': Image, 'comment': value, 'success': "successful"}, status=200)
 
 def following_post(request):
     user = User.objects.get(id=request.user.id)
