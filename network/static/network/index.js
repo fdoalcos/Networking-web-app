@@ -4,9 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
         load_landingpage('all__post');
       });
 
-    document.getElementById("post__commentform").removeAttribute('required');
-
-
     // by default, landing page should be default
     load_landingpage('all__post')
     
@@ -202,9 +199,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (element.id.startsWith('comment_')) {
             let id = element.dataset.id
-
+            
             // console.log("I'm clicked")
-            let value = document.getElementById("post__commentform").value;
+            let value = document.getElementById(`post__commentform_${id}`).value;
             let div = document.getElementById(`comments_${id}`)
             // let user = document.getElementById('comment_user')
             // let userComment = document.getElementById('comment_comment')
@@ -232,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.appendChild(document.createElement("BR"));
             })
             
-            document.getElementById("id_comment").value = '';
+            document.getElementById(`post__commentform_${id}`).value = '';
             console.log("done")
         }
 
@@ -243,6 +240,21 @@ document.addEventListener('DOMContentLoaded', () => {
             let div = document.getElementById(`start-comment_${id}`)
             div.style.display = "block";
             maindiv.style.borderRadius = 0;
+            
+            
+            // disable button
+            
+            let textarea = document.getElementById(`post__commentform_${id}`)
+            textarea.onkeyup = () => {
+                console.log("text area working right")
+            
+            if (document.getElementById(`post__commentform_${id}`).value.length > 0) {
+                document.getElementById(`comment_${id}`).style.color = "#707273";
+            } else {
+                document.getElementById(`comment_${id}`).style.color = "#B4B6B8";
+            }
+        }
+
         }
 
 
@@ -301,21 +313,21 @@ function load_landingpage(type) {
 
         // disable button
 
-        document.getElementById('post__commentform').onkeyup = (event) => {
-            let element = event.target
-            let id = element.dataset.id
-            let postId = document.getElementById('post__commentforminside').innerHTML;
+        // document.getElementById('post__commentform').onkeyup = (event) => {
+        //     let element = event.target
+        //     let id = element.dataset.id
+        //     let postId = document.getElementById('post__commentforminside').innerHTML;
 
-            // document.getElementsByName('post__commentbutton').style.color = "blue";
-            console.log(`this is the ${postId} and it's working`)
-            // console.log(document.getElementsByName('post__commentbutton'))
-            // document.getElementsByName('post__commentbutton').style.color = "blue";
-            if (document.getElementById('post__commentform').value.length > 0) {
-                document.getElementById(`comment_${postId}`).style.color = "#707273";
-            } else {
-                document.getElementById(`comment_${postId}`).style.color = "#B4B6B8";
-            }
-        }
+        //     // document.getElementsByName('post__commentbutton').style.color = "blue";
+        //     console.log(`this is the ${postId} and it's working`)
+        //     // console.log(document.getElementsByName('post__commentbutton'))
+        //     // document.getElementsByName('post__commentbutton').style.color = "blue";
+        //     if (document.getElementById('post__commentform').value.length > 0) {
+        //         document.getElementById(`comment_${postId}`).style.color = "#707273";
+        //     } else {
+        //         document.getElementById(`comment_${postId}`).style.color = "#B4B6B8";
+        //     }
+        // }
 
     }
 

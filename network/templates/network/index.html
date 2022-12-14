@@ -239,7 +239,8 @@
                                         {% endif %}
                                     </div>
                                     <div class="post__commentForm">
-                                        {% render_field forms.comment id="post__commentform" class="post__commentform" placeholder="Add a comment" data-id="{{ inbox.id }}" %}<p id="post__commentforminside"style="display: none;">{{ inbox.id }}</p>
+                                        <input type="text" id="post__commentform_{{ inbox.id }}" class="post__commentform" placeholder="Add a comment" data-id="{{ inbox.id }}" %}><p id="post__commentforminside"style="display: none;">{{ inbox.id }}</p>
+                                        <!-- {% render_field forms.comment id="post__commentform" class="post__commentform" placeholder="Add a comment" data-id="{{ inbox.id }}" %}<p id="post__commentforminside"style="display: none;">{{ inbox.id }}</p> -->
                                         <!-- <input id="comment_{{ inbox.id }}" type="submit" hidden value="comment" data-id="{{ inbox.id }}" /> -->
                                     </div>
                                     <div>
