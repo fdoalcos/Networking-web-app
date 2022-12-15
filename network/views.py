@@ -4,7 +4,7 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
-from .forms import Inboxform, Commentform, Profileform
+from .forms import Inboxform, Commentform, Profileform, Editform
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
 
@@ -150,12 +150,24 @@ def unlike(request, like_id):
     pass
 
 def profile(request, user_id):
+    mainuser = User.objects.get(id=request.user.id)
     user = User.objects.get(id=user_id)
     post = Post.objects.filter(users=user)
     profile = Profile.objects.get(id=user_id - 1)
-    check = Profile.objects.filter(Follow=user).exists()
+
+    # check if user exists
+    check = mainuser.followed.filter(Users=user).exists()
+
+    # checll how many number of following and followers
+    followersCount = user.follows.all().count()
+    followingCount = user.followed.all().count()
+    
+
+    # forms
     form = Inboxform()
+    forms = Editform()
     commentform = Commentform()
+    
 
 
     if request.method == "POST":
@@ -169,25 +181,57 @@ def profile(request, user_id):
         "check": check,
         "form": form,
         "forms": commentform,
+        "editforms": forms,
 
         
     })
+    
 
+def profileBackground(request, profile_id):
+    profile = Profile.objects.get(id=profile_id - 1)
+
+    if request.method == "POST":
+        if len(request.FILES) != 0:
+            profile.Background_pic = request.FILES['backgroundImage_file']
+            profile.save()
+
+        return HttpResponseRedirect(reverse('profile', args=[profile_id]))
+
+def profileEdit(request, edit_id):
+    profile = Profile.objects.get(id=edit_id - 1)
+
+    if request.method == "POST":
+        form = Editform(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.Users = profile.Users
+            instance.save()
+            return HttpResponseRedirect(reverse('profile', args=[edit_id]))
+
+
+@csrf_exempt
 def follow(request, follow_id):
     user = User.objects.get(id=request.user.id)
     following_user = User.objects.get(id=follow_id)
     profile = Profile.objects.get(Users=following_user)
     profile2 = Profile.objects.get(Users=user)
-    check = user.followed.filter(Users=following_user).exists()
 
-    if check:
-        profile.Followers.remove(user)
-        profile2.Follow.remove(following_user)
-    else:
-        profile.Followers.add(user)
-        profile2.Follow.add(following_user)
+    if request.method == "POST":
+
+        followersCount = following_user.follows.all().count()
+        followingCount = following_user.followed.all().count()
+
+        check = user.followed.filter(Users=following_user).exists()
+
+        if check:
+            profile.Followers.remove(user)
+            profile2.Follow.remove(following_user)
+        else:
+            profile.Followers.add(user)
+            profile2.Follow.add(following_user)
     
-    return HttpResponseRedirect(reverse('profile', args=[follow_id]))
+        return JsonResponse({'check': check, 'followersC': followersCount, 'followingC': followingCount, 'successful': "successful"}, status=200)
+    # return HttpResponseRedirect(reverse('profile', args=[follow_id]))
 
 def unfollow(request, follow_id):
     pass

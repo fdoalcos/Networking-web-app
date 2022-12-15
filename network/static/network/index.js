@@ -197,6 +197,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }
 
+        if (element.id.startsWith('follow_')) {
+            // get id of the follow user
+            let id = element.dataset.id
+
+            console.log(`I'm clicked and this is the ${id}`)
+
+            // fetch to follow
+
+            fetch(`/profile/follow/${id}`, {
+                method: "POST"
+            })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                else {
+                    console.log("error found")
+                }
+            })
+            .then(data => {
+                console.log(data)
+                if (data.check === true) {
+                    console.log("I'm True");
+                    document.querySelector(`#follow_${id}`).innerHTML = 'Unfollow';
+                }
+                else {
+                    console.log("I'm False");
+                    document.querySelector(`#follow_${id}`).innerHTML = 'Follow';
+                }
+            })
+            
+        }
 
         if (element.id.startsWith('comment_')) {
             let id = element.dataset.id

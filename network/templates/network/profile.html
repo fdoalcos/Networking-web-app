@@ -19,29 +19,52 @@
                     <input type="file" name="image_file">
                     <input id="submit_profile" type="submit">
                 </form>
+
+                <form action="{% url 'background' request.user.id %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" name="backgroundImage_file">
+                    <input id="submit_profile" type="submit">
+                </form>
             {% endif %}
+            
             <div>
                 <p>Following: </p>
             </div>
             <div>
                 <p>Followers: </p>
             </div>
+            {% if request.user == user %}
+                <form action="{% url 'profileEdit' request.user.id %}" method="POST">
+                    {% csrf_token %}
+                    {{ editforms }}
+                    <input type="submit">
+                </form>
+                
+            {% endif %}
         </div>
         <div>
             <!-- still a bug -->
             <div>
-                {% if request.user != user and not check %}
+                <!-- this is the follow function before, now updating it -->
+                <!-- {% if request.user != user and not check %}
                     <form action="{% url 'follow' user.id %}">
                         {% csrf_token %}
-                        <button >Follow</button>
+                        <button >Follow</button> -->
                         <!-- <input type="submit" name="follow" value="Follow"> -->
-                    </form>
+                    <!-- </form>
                 {% elif request.user != user and check %}
                     <form action="{% url 'follow' user.id %}">
                         {% csrf_token %}
-                        <button>Unfollow</button>
+                        <button>Unfollow</button> -->
                         <!-- <input type="submit" name="unfollow" value="Unfollow"> -->
+                <!-- {% endif %} -->
+                {% if request.user != user and not check %}
+                    <button class="inbox__follow" id="follow_{{ user.id }}" data-id="{{ user.id }}">Unfollow</button>
+                {% elif request.user != user and check %}
+                    <button class="inbox__follow" id="follow_{{ user.id }}" data-id="{{ user.id }}">Follow</button>
                 {% endif %}
+
+
             </div>
             <!-- this is for news profile etc -->
 

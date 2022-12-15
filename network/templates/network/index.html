@@ -175,7 +175,14 @@
                             </div>
                             <div class="post__name">
                                 <a  class="post__username" href="{% url 'profile' inbox.users.id %}">{{ inbox.users }}</a>
-                                <p class="post__calendar">10 November at 10:22</p>
+                                <!-- <p class="post__calendar">10 November at 10:22</p> -->
+                                <p class="post__calendar">
+                                    {% if inbox.Created %}
+                                        {{ inbox.Created }}
+                                    {% else %}
+                                        10 November at 10:22
+                                    {% endif %}
+                                </p>
                             </div>
                             <div class="post__edit">
                                     <!-- <input type="button" class="edit__button"  value="Edit" name="edit" id="inbox_{{ inbox.id }}" data-id="{{ inbox.id }}" data-bs-toggle="modal" data-bs-target="#staticBackdropedit{{ inbox.id }}"> -->

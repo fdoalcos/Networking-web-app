@@ -17,3 +17,8 @@ class Profileform(ModelForm):
         model = Profile
         fields = ['Profile_pic']
 
+class Editform(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['Bio', 'Location']
+
