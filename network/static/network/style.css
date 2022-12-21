@@ -149,7 +149,7 @@ img {
 
 .profile__button {
     position: absolute;
-    right: 2%;
+    right: 2.5%;
     bottom: 5%;
 }
 
@@ -658,6 +658,10 @@ img {
 
 
 /* edit post */
+
+.edit__profilebutton {
+    margin-left: auto;
+}
 
 .edit__button {
     margin-left: 22rem;

@@ -291,15 +291,18 @@ def comment(request, comment_id):
 def following_post(request):
     user = User.objects.get(id=request.user.id)
     following = user.followed.all()
+    exists = user.followed.all().exists()
     post = Post.objects.all()
     commentform = Commentform()
 
-
-    for follow in following:
-        following_post = Post.objects.filter(users=follow.Users)
-        
+    if exists:
+        for follow in following:
+            following_post = Post.objects.filter(users=follow.Users)
+    else:
+        following_post = None
 
     return render(request, "network/following.html", {
+        "exist": exists,
         "following": following_post,
         "forms": commentform
     })

@@ -5,39 +5,44 @@
 {% block body %}
     <h1>Hello world!</h1>
     <div>
-        {% for inbox in following %}
-            <div>
-                <p id="">Working</p>
-                <a href="{% url 'profile' inbox.users.id %}">{{ inbox.users }}</a>
-                {% if inbox.users == request.user %}
-                    <input type="button" class="edit_button"  value="Edit" name="edit" id="inbox_{{ inbox.id }}" data-id="{{ inbox.id }}">
-                {% endif %}
-            </div>
-            <div id="div_{{ inbox.id }}">
-                <p id="body_{{ inbox.id }}">{{ inbox.Inbox }}</p>
-                {% if inbox.Image %}
-                    <img id="image_{{ inbox.id }}" src="{{ inbox.Image.url }}" alt="image" width=100>
-                {% endif %}
-
+        {% if exist %}
+            {% for inbox in following %}
+            
                 <div>
-                    {{ forms }}
-                    <input id="comment_{{ inbox.id }}" type="submit" value="comment" data-id="{{ inbox.id }}">
+                    <p id="">Working</p>
+                    <a href="{% url 'profile' inbox.users.id %}">{{ inbox.users }}</a>
+                    {% if inbox.users == request.user %}
+                        <input type="button" class="edit_button"  value="Edit" name="edit" id="inbox_{{ inbox.id }}" data-id="{{ inbox.id }}">
+                    {% endif %}
                 </div>
+                <div id="div_{{ inbox.id }}">
+                    <p id="body_{{ inbox.id }}">{{ inbox.Inbox }}</p>
+                    {% if inbox.Image %}
+                        <img id="image_{{ inbox.id }}" src="{{ inbox.Image.url }}" alt="image" width=100>
+                    {% endif %}
+
                     <div>
-                        {% if request.user in inbox.liked.all %}
-                            <button id="like_{{ inbox.id }}" data-id="{{ inbox.id }}"><i class="bi bi-hand-thumbs-up"></i>Unlike</button><div id="count_{{ inbox.id }}">{{ inbox.count }}</div>
-                        {% else %}
-                            <button id="like_{{ inbox.id }}" data-id="{{ inbox.id }}"><i class="bi bi-hand-thumbs-up"></i>Like</button><div id="count_{{ inbox.id }}">{{ inbox.count }}</div>
-                        {% endif %}
+                        {{ forms }}
+                        <input id="comment_{{ inbox.id }}" type="submit" value="comment" data-id="{{ inbox.id }}">
                     </div>
-                    <div id="comments_{{ inbox.id }}">
-                       {% for comment in inbox.comment_post.all %}
-                            <p id="comment_user">{{ comment.username }}</p>
-                            <p id="comment_comment">{{ comment.comment }}</p>
-                       {% endfor  %}
-                    </div>
-            </div>
-        {% endfor %}
+                        <div>
+                            {% if request.user in inbox.liked.all %}
+                                <button id="like_{{ inbox.id }}" data-id="{{ inbox.id }}"><i class="bi bi-hand-thumbs-up"></i>Unlike</button><div id="count_{{ inbox.id }}">{{ inbox.count }}</div>
+                            {% else %}
+                                <button id="like_{{ inbox.id }}" data-id="{{ inbox.id }}"><i class="bi bi-hand-thumbs-up"></i>Like</button><div id="count_{{ inbox.id }}">{{ inbox.count }}</div>
+                            {% endif %}
+                        </div>
+                        <div id="comments_{{ inbox.id }}">
+                        {% for comment in inbox.comment_post.all %}
+                                <p id="comment_user">{{ comment.username }}</p>
+                                <p id="comment_comment">{{ comment.comment }}</p>
+                        {% endfor  %}
+                        </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>You are not following any users</p>
+        {% endif %}
     </div>
 
 
