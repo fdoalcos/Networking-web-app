@@ -257,12 +257,12 @@
                                     </div>
                                     
                                     {% if request.user == user %}
-                                        <form action="{% url 'profile' request.user.id %}" method="post" enctype="multipart/form-data">
+                                        <!-- <form action="{% url 'profile' request.user.id %}" method="post" enctype="multipart/form-data">
                                             {% csrf_token %}
                                             <input type="file" name="image_file">
                                             <input id="submit_profile" type="submit">
                                         </form>
-                        
+                         -->
                                         <!-- <form action="{% url 'background' request.user.id %}" method="post" enctype="multipart/form-data">
                                             {% csrf_token %}
                                             <input type="file" name="backgroundImage_file">
