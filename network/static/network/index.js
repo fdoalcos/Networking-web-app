@@ -1,11 +1,22 @@
+
+
 document.addEventListener('DOMContentLoaded', () => {
+    
     document.querySelector('#all__post').addEventListener('click', () => {
         // call landing page
         load_landingpage('all__post');
       });
+    
+    document.querySelector('#mainUser').addEventListener('click', () => {
+        // call landing page
+        load_landingpage('mainUser');
+        // console.log("Hello")
+    });
 
     // by default, landing page should be default
     load_landingpage('all__post')
+
+    
     
 
     document.addEventListener('click', event => {
@@ -283,6 +294,16 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("done")
         }
 
+        if (element.id.startsWith('staticBackdropImage')) {
+            console.log("I'm in the user's page")
+            // const inputfileImage = document.getElementById("input__fileImage");
+            // inputfileImage.addEventListener('change', event => {
+            //     var div = document.getElementById("image__filename");
+            //     var imgUrl = event.target.value.replace(/^.*\\/, "")
+            //     console.log(imgUrl);
+            //     div.innerHTML = imgUrl
+        }
+
         if (element.id.startsWith('post__')) {
             let id = element.dataset.id
             console.log(`I'm clicked ${id}`)
@@ -321,8 +342,12 @@ function edit() {
     console.log("edit working")
 }
 
+
+
 function load_landingpage(type) {
-    if (type === "all__post") {
+    console.log(`This mailbox is going to be in ${type}`)
+
+    if (type == "all__post") {
         console.log("I'm on the landing page now");
         // api key for news
 
@@ -361,6 +386,12 @@ function load_landingpage(type) {
             div.innerHTML = imgUrl
         })
 
+        
+    
+    
+
+        
+
         // disable button
 
         // document.getElementById('post__commentform').onkeyup = (event) => {
@@ -379,6 +410,12 @@ function load_landingpage(type) {
         //     }
         // }
 
+    }
+
+    else {
+        console.log("This is main user page")
+
+        
     }
 
 }

@@ -21,11 +21,11 @@
               <ul class="navbar-nav mr-auto">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile' request.user.id %}"><strong>{{ request.user.username }}</strong></a>
+                        <a class="nav-link" href="{% url 'profile' request.user.id %}" id="mainUser"><strong>{{ request.user.username }}</strong></a>
                     </li>
                 {% endif %}
                 <li class="nav-item">
-                  <a class="nav-link" id="all__post" href="{% url 'index' %}">All Posts</a>
+                  <a class="nav-link" href="{% url 'index' %}" id="all__post">All Posts</a>
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item">

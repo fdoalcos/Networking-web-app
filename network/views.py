@@ -165,7 +165,7 @@ def profile(request, user_id):
 
     # forms
     form = Inboxform()
-    forms = Editform()
+    forms = Editform(instance=profile)
     commentform = Commentform()
     
 
@@ -178,6 +178,7 @@ def profile(request, user_id):
     return render(request, "network/profile.html", {
         "posts": post,
         "user": user,
+        "profile": profile,
         "check": check,
         "form": form,
         "forms": commentform,
@@ -203,9 +204,14 @@ def profileEdit(request, edit_id):
     if request.method == "POST":
         form = Editform(request.POST)
         if form.is_valid():
-            instance = form.save(commit=False)
-            instance.Users = profile.Users
-            instance.save()
+            # instance = form.save(commit=False)
+            # instance.Users = profile.Users
+            profile.Bio = request.POST["Bio"]
+            profile.Location = request.POST["Location"]
+            profile.Born = request.POST["Born"]
+            profile.Status = request.POST["Status"]
+            profile.Occupation = request.POST["Occupation"]
+            profile.save()
             return HttpResponseRedirect(reverse('profile', args=[edit_id]))
 
 

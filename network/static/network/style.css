@@ -125,11 +125,54 @@ img {
     border-radius: 50% !important;
 }
 
+.profile__imagehead {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    margin-top: -35px;
+}
+
 .profile__userimage {
     width: 100%;
     aspect-ratio: 1/1;
     object-fit: cover;
 }
+
+.profile__userimages {
+    position: relative;
+    margin-top: -1.75rem;
+    border: 3.5px solid white;
+    width: 7.75rem;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.profile__button {
+    position: absolute;
+    right: 2%;
+    bottom: 5%;
+}
+
+.profile__imagebutton {
+    margin: none;
+    outline: none;
+    position: relative;
+    top: 1.8rem;
+    right: 2.2rem;
+    border-radius: 50%;
+    border: none;
+    transition: 0.5s;
+}
+
+.profile__imagebutton:hover {
+    background-color: #dcdcdc;
+}
+
+.profile__imagetag {
+    font-size: 15px;
+}
+
+
 
 
 .profile__users {
@@ -161,6 +204,12 @@ img {
     justify-content: center;
     text-align: center;
     gap: 1rem !important;
+}
+
+.profile__follows {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem !important;
 }
 
 .profile__post {
@@ -640,6 +689,62 @@ img {
 
 .profile__body {
     padding: 0 10px;
+}
+
+.profile__main {
+    margin: auto;
+    border: 1px solid black;
+    width: 100%;
+}
+
+.profile__background {
+    position: relative;
+    /* width: 100%; */
+    /* height: 200px; */
+    /* height: 200px !important; */
+    /* aspect-ratio: 0.1/0.1; */
+    /* object-fit: cover; */
+    /* object-position: center; */
+    /* background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat; */
+    /* border-radius: 5px 5px 0 0; */
+}
+
+.h-200 {
+    /* height: 200px !important; */
+}
+
+.background__image {
+    /* position: absolute; */
+    /* height: 200px !important; */
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
+    
+}
+
+.profile__marginpadd {
+    padding: 0 0 20px 0;
+    background-color: #eff2f6;
+}
+
+.profile__main {
+    /* margin-bottom: 20px; */
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    border: none;
+
+}
+
+.profile__mainbody {
+    padding: 1rem;
+}
+
+.profile__size {
+    width: 10rem;
 }
 
 .profile__user {

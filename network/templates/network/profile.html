@@ -7,42 +7,6 @@
     <!-- profile page -->
     <div>
         <div>
-            {% if user.userProfile.Profile_pic %}
-                <img id="Profile_pic" src="{{ user.userProfile.Profile_pic.url }}" alt="image" width=100>
-            {% else %}
-                <img id="Profile_pic" src="{% static 'network/profile.png' %}" alt="image" width=100>
-            {% endif %}
-            <h1>{{ user }}</h1>
-            {% if request.user == user %}
-                <form action="{% url 'profile' request.user.id %}" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type="file" name="image_file">
-                    <input id="submit_profile" type="submit">
-                </form>
-
-                <form action="{% url 'background' request.user.id %}" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type="file" name="backgroundImage_file">
-                    <input id="submit_profile" type="submit">
-                </form>
-            {% endif %}
-            
-            <div>
-                <p>Following: </p>
-            </div>
-            <div>
-                <p>Followers: </p>
-            </div>
-            {% if request.user == user %}
-                <form action="{% url 'profileEdit' request.user.id %}" method="POST">
-                    {% csrf_token %}
-                    {{ editforms }}
-                    <input type="submit">
-                </form>
-                
-            {% endif %}
-        </div>
-        <div>
             <!-- still a bug -->
             <div>
                 <!-- this is the follow function before, now updating it -->
@@ -58,11 +22,7 @@
                         <button>Unfollow</button> -->
                         <!-- <input type="submit" name="unfollow" value="Unfollow"> -->
                 <!-- {% endif %} -->
-                {% if request.user != user and not check %}
-                    <button class="inbox__follow" id="follow_{{ user.id }}" data-id="{{ user.id }}">Unfollow</button>
-                {% elif request.user != user and check %}
-                    <button class="inbox__follow" id="follow_{{ user.id }}" data-id="{{ user.id }}">Follow</button>
-                {% endif %}
+                
 
 
             </div>
@@ -107,7 +67,7 @@
                                     {% else %}
                                         <img class="profile__userimage rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=70>
                                     {% endif %}
-                                        </div>
+                                </div>
                                 
                             </div>
                             <div class="profile__body">
@@ -167,7 +127,208 @@
         
                 </diV>
                 <div class="index__main">
-                    {% if request.user == user%}
+                        <!-- start sample -->
+                        <div class="profile__marginpadd">
+                            <div class="profile__main">
+                                <div class="profile__background h-200">
+                                    <!-- image -->
+                                    <div class="profile__backgroundSize">
+                                        {% if user.userProfile.Background_pic %}
+                                            <img class="background__image" id="Profile_pic" src="{{ user.userProfile.Background_pic.url }}" alt="image" width=70>
+                                        {% else %}
+                                            <img class="background__image" id="Profile_pic" src="https://social.webestica.com/assets/images/bg/05.jpg" alt="image" width=70>
+                                        {% endif %}
+                                        {% if request.user == user %}
+                                            <button class="profile__button" data-bs-toggle="modal" data-bs-target="#staticBackdropBackgroundImage"><i class="bi bi-camera-fill profile__imagetag"></i> Add cover photo</button>
+                                            <!-- form pop up -->                        
+                                            <!-- Modal for Background Image -->
+                                            <div class="modal fade" id="staticBackdropBackgroundImage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Add Background Image</h5>
+                                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <!-- body of modals -->
+                                                        <form action="{% url 'background' request.user.id %}" method="post" enctype="multipart/form-data">
+                                                            {% csrf_token %}
+                            
+                                                            <div class="inbox__header">
+                                                                <p class="inbox__title">Add Image</p>
+                                                            </div>
+                                                            
+                                                            
+                                                            <div class="inbox__filemargin">
+                                                                <label class="inbox__label" for="input__fileImages">
+                                                                    <!-- {% render_field form.Image id="input__file" style="display: none;" class="inbox__image inbox__file" %} -->
+                                                                    <input type="file" class="inbox__image inbox__file" name="backgroundImage_file" id="input__fileImages" style="display: none;">
+                                                                    <i class="bi bi-images image__tag"></i>
+                                                                    <label id="backgroundImage_file" for="input__fileImages" class="input__label">                                        
+                                                                        Drag here or click to upload photo
+                                                                    </label> 
+                                                                </label>
+                                                            </div>
+                                                            <div class="modal-footer modal-below">
+                                                                <button type="button" class="button btn__danger" data-bs-dismiss="modal">Close</button>                                    
+                                                                <input id="submit_inbox" type="submit" class="button btn__success">
+                                                            </div>
+                                                        </form>
+                                                        <!-- endbody -->
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                            <!-- endform pop up -->                                        
+                                        {% endif %} 
+                                    </div>   
+                                </div>
+                                <div class="profile__mainbody">
+                                    <div class="profile__imagehead ">
+                                        <!-- image -->
+                                        <div class="profile__size">
+                                            {% if user.userProfile.Profile_pic %}
+                                            <img class="profile__userimages rounded__circle" id="Profile_pic" src="{{ user.userProfile.Profile_pic.url }}" alt="image" width=70>
+                                            {% else %}
+                                                <img class="profile__userimages rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=70>
+                                            {% endif %}  
+                                            {% if request.user == user %}
+                                                <button class="profile__imagebutton" data-bs-toggle="modal" data-bs-target="#staticBackdropImage"><i class="bi bi-camera-fill profile__imagetag"></i></button>
+                                                <!-- form pop up -->
+                                                <!-- Modal for Image -->
+                                                <div class="modal fade" id="staticBackdropImage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Add Profile Image</h5>
+                                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- body of modals -->
+                                                            <form action="{% url 'profile' request.user.id %}" method="post" enctype="multipart/form-data">
+                                                                {% csrf_token %}
+                                
+                                                                <div class="inbox__header">
+                                                                    <p class="inbox__title">Add Image</p>
+                                                                </div>
+                                                                
+                                                                
+                                                                <div class="inbox__filemargin">
+                                                                    <label class="inbox__label" for="input__fileImage">
+                                                                        <!-- {% render_field form.Image id="input__file" style="display: none;" class="inbox__image inbox__file" %} -->
+                                                                        <input type="file" class="inbox__image inbox__file" name="image_file" id="input__fileImage" style="display: none;">
+                                                                        <i class="bi bi-images image__tag"></i>
+                                                                        <label id="image__filename" for="input__fileImage" class="input__label">                                        
+                                                                            Drag here or click to upload photo
+                                                                        </label> 
+                                                                    </label>
+                                                                </div>
+                                                                <div class="modal-footer modal-below">
+                                                                    <button type="button" class="button btn__danger" data-bs-dismiss="modal">Close</button>                                    
+                                                                    <input id="submit_inbox" type="submit" class="button btn__success">
+                                                                </div>
+                                                            </form>
+                                                            <!-- endbody -->
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <!-- endform pop up -->
+                                            {% endif %}    
+                                        </div>   
+                                        <div>
+                                            {% if request.user == user %}
+                                                <input type="button" data-bs-toggle="modal" data-bs-target="#staticBackdropProfileEdit" value="Edit Profile">
+                                            {% endif %}
+                                            {% if request.user != user and not check %}
+                                                <button class="inbox__follow" id="follow_{{ user.id }}" data-id="{{ user.id }}">Unfollow</button>
+                                            {% elif request.user != user and check %}
+                                                <button class="inbox__follow" id="follow_{{ user.id }}" data-id="{{ user.id }}">Follow</button>
+                                            {% endif %} 
+                                        </div>
+                                    </div>
+                                    <div class="profile__name">
+                                        <h1>{{ user }}</h1>
+                                        <p>{{ user.email }}</p>
+                                    </div>
+                                    
+                                    {% if request.user == user %}
+                                        <form action="{% url 'profile' request.user.id %}" method="post" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <input type="file" name="image_file">
+                                            <input id="submit_profile" type="submit">
+                                        </form>
+                        
+                                        <!-- <form action="{% url 'background' request.user.id %}" method="post" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <input type="file" name="backgroundImage_file">
+                                            <input id="submit_profile" type="submit">
+                                        </form> -->
+                                    {% endif %}
+                                    
+                                    <div class="profile__information">
+                                        {% if profile.Location %}
+                                            <p>{{ profile.Location }}</p>
+                                        {% endif %}
+                                        {% if profile.Created %}
+                                            <p>{{ profile.Created }}</p>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <div class="profile__follows">
+                                        <div>
+                                            <p>10 Following</p>
+                                        </div>
+                                        <div>
+                                            <p>20 Followers</p>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                                
+                                <div>
+                                    <!-- modal button for edit -->
+                                    {% if request.user == user %}
+                                        <!-- modal for edit -->
+                                    
+                                        <div class="modal fade" id="staticBackdropProfileEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Create post</h5>
+                                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- body of modals -->
+                                                    <form action="{% url 'profileEdit' request.user.id %}" method="POST">
+                                                        {% csrf_token %}
+                                                        {{ editforms.as_p }}
+                                                        <!-- <input type="submit"> -->
+                                                        <div class="modal-footer modal-below">
+                                                            <button type="button" class="button btn__danger" data-bs-dismiss="modal">Close</button>                                    
+                                                            <input id="submit_inbox" type="submit" class="button btn__success">
+                                                        </div>
+                                                    </form>
+                                                    <!-- endbody -->
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <!-- endmodal -->
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- end sample -->
+                        {% if request.user == user%}
                         <div class="inbox__marginpad">
                             <div class="inbox__post">
                                 <!-- button for modal -->

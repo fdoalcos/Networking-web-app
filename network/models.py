@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils.timezone import now
 
 
 class User(AbstractUser):
@@ -28,14 +29,20 @@ class Post(models.Model):
 #     Location = models.CharField(null=True, blank=True, max_length=30)
 
 class Profile(models.Model):
+    # choices
+    status = ("Single", "Single"), ("It's Complicated", "It's Complicated"), ("In a Relationship", "In a Relationship")
+
     Users = models.OneToOneField(User, on_delete = models.CASCADE, related_name="userProfile")
     Followers = models.ManyToManyField(User, blank=True, null=True, related_name="followed")
     Follow = models.ManyToManyField(User, blank=True, null=True, related_name="follows")
     Background_pic = models.ImageField(upload_to='images/', null=True, blank=True)
     Profile_pic = models.ImageField(upload_to='images/', null=True, blank=True)
+    Born = models.CharField(blank=True, max_length=160)
+    Occupation = models.CharField(blank=True, max_length=160)
+    Status = models.CharField(blank=True, max_length=160, choices=status)
     Bio = models.CharField(blank=True, max_length=160)
     Location = models.CharField(blank=True, max_length=30)
-    Created = models.TimeField(auto_now_add=True, blank=True, null=True)
+    Created = models.DateTimeField(default=now, blank=True, null=True)
 
     def __str__(self):
         return f"{self.Users}'s following and followers"

@@ -20,5 +20,5 @@ class Profileform(ModelForm):
 class Editform(ModelForm):
     class Meta:
         model = Profile
-        fields = ['Bio', 'Location']
+        fields = ['Bio', 'Location', 'Born', 'Status', 'Occupation']
 
