@@ -231,11 +231,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log(data)
                 if (data.check === true) {
                     console.log("I'm True");
-                    document.querySelector(`#follow_${id}`).innerHTML = 'Unfollow';
+                    // swap
+                    document.querySelector(`#follow_${id}`).innerHTML = 'Follow';
                 }
                 else {
                     console.log("I'm False");
-                    document.querySelector(`#follow_${id}`).innerHTML = 'Follow';
+                    // swap
+                    document.querySelector(`#follow_${id}`).innerHTML = 'Unfollow';
                 }
             })
             

@@ -245,10 +245,10 @@
                                                 <input type="button" data-bs-toggle="modal" data-bs-target="#staticBackdropProfileEdit" value="Edit Profile">
                                             
                                             {% else %}
-                                                {% if not check %}
-                                                    <button class="inbox__follow" id="follow_{{ user.id }}" data-id="{{ user.id }}">Unfollow</button>
-                                                {% else %}
+                                                {% if check == False %}
                                                     <button class="inbox__follow" id="follow_{{ user.id }}" data-id="{{ user.id }}">Follow</button>
+                                                {% else %}
+                                                    <button class="inbox__follow" id="follow_{{ user.id }}" data-id="{{ user.id }}">Unfollow</button>
                                                 {% endif %} 
                                             {% endif %}
                                             
