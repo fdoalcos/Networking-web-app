@@ -243,12 +243,15 @@
                                         <div class="edit__profilebutton">
                                             {% if request.user == user %}
                                                 <input type="button" data-bs-toggle="modal" data-bs-target="#staticBackdropProfileEdit" value="Edit Profile">
+                                            
+                                            {% else %}
+                                                {% if not check %}
+                                                    <button class="inbox__follow" id="follow_{{ user.id }}" data-id="{{ user.id }}">Unfollow</button>
+                                                {% else %}
+                                                    <button class="inbox__follow" id="follow_{{ user.id }}" data-id="{{ user.id }}">Follow</button>
+                                                {% endif %} 
                                             {% endif %}
-                                            {% if request.user != user and not check %}
-                                                <button class="inbox__follow" id="follow_{{ user.id }}" data-id="{{ user.id }}">Unfollow</button>
-                                            {% elif request.user != user and check %}
-                                                <button class="inbox__follow" id="follow_{{ user.id }}" data-id="{{ user.id }}">Follow</button>
-                                            {% endif %} 
+                                            
                                         </div>
                                     </div>
                                     <div class="profile__name">
@@ -281,10 +284,10 @@
                                     
                                     <div class="profile__follows">
                                         <div>
-                                            <p>10 Following</p>
+                                            <p>{{ followingCount }} Following</p>
                                         </div>
                                         <div>
-                                            <p>20 Followers</p>
+                                            <p>{{ followersCount }} Followers</p>
                                         </div>
                                     </div>
                                     

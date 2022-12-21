@@ -183,6 +183,8 @@ def profile(request, user_id):
         "form": form,
         "forms": commentform,
         "editforms": forms,
+        "followersCount": followersCount,
+        "followingCount": followingCount
 
         
     })
