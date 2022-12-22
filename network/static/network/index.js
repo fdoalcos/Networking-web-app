@@ -17,7 +17,26 @@ document.addEventListener('DOMContentLoaded', () => {
     load_landingpage('all__post')
 
     
-    
+    document.getElementById("profile__imagebutton").onclick = () => {
+        const inputfileImage = document.getElementById("input__fileImage");
+        inputfileImage.addEventListener('change', event => {
+            var div = document.getElementById("image__filename");
+            var imgUrl = event.target.value.replace(/^.*\\/, "")
+            console.log(imgUrl);
+            div.innerHTML = imgUrl
+        });
+    };
+
+    document.getElementById("profile__bimagebutton").onclick = () => {
+        const inputfileImage = document.getElementById("input__fileImages");
+        inputfileImage.addEventListener('change', event => {
+            var div = document.getElementById("backgroundImage_file");
+            var imgUrl = event.target.value.replace(/^.*\\/, "")
+            console.log(imgUrl);
+            div.innerHTML = imgUrl
+        });
+    };
+
 
     document.addEventListener('click', event => {
 

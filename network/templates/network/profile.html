@@ -97,7 +97,7 @@
                                             <img class="background__image" id="Profile_pic" src="https://social.webestica.com/assets/images/bg/05.jpg" alt="image" width=70>
                                         {% endif %}
                                         {% if request.user == user %}
-                                            <button class="profile__button" data-bs-toggle="modal" data-bs-target="#staticBackdropBackgroundImage"><i class="bi bi-camera-fill profile__imagetag"></i> Add cover photo</button>
+                                            <button class="profile__button" data-bs-toggle="modal" data-bs-target="#staticBackdropBackgroundImage" id="profile__bimagebutton"><i class="bi bi-camera-fill profile__imagetag"></i> Add cover photo</button>
                                             <!-- form pop up -->                        
                                             <!-- Modal for Background Image -->
                                             <div class="modal fade" id="staticBackdropBackgroundImage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -153,7 +153,7 @@
                                                 <img class="profile__userimages rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=70>
                                             {% endif %}  
                                             {% if request.user == user %}
-                                                <button class="profile__imagebutton" data-bs-toggle="modal" data-bs-target="#staticBackdropImage"><i class="bi bi-camera-fill profile__imagetag"></i></button>
+                                                <button class="profile__imagebutton" data-bs-toggle="modal" data-bs-target="#staticBackdropImage" id="profile__imagebutton"><i class="bi bi-camera-fill profile__imagetag"></i></button>
                                                 <!-- form pop up -->
                                                 <!-- Modal for Image -->
                                                 <div class="modal fade" id="staticBackdropImage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
