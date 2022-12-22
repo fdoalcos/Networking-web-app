@@ -112,15 +112,7 @@ def register(request):
 
 @csrf_exempt
 def liked(request, like_id):
-    # user = request.user
-    # post = Post.objects.get(pk=like_id)
-    # # if post.liked.filter(id=request.user.id):
-    # if post.isliked(user):
-    #     post.liked.remove(request.user)
-    # else:
-    #     post.liked.add(request.user)
-    # return HttpResponseRedirect(reverse('index'))
-
+    
     user = request.user
 
     try:
@@ -137,9 +129,6 @@ def liked(request, like_id):
         islike = True
 
     count = post.count()
-
-    # return HttpResponseRedirect(reverse('index'))
-    # instead of HttpResponseRedirect, we can use JsonResponse
 
     return JsonResponse({'islike': islike, 'count': count}, status=200)
 
@@ -189,6 +178,16 @@ def profile(request, user_id):
         
     })
     
+def profilePost(request, user_id):
+
+    if request.method == "POST":
+        form = Inboxform(request.POST, request.FILES)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.users = request.user
+            instance.save()
+            return HttpResponseRedirect(reverse("profile", args=[user_id]))
+            form = Inboxform()
 
 def profileBackground(request, profile_id):
     profile = Profile.objects.get(id=profile_id - 1)
