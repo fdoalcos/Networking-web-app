@@ -110,6 +110,11 @@ img {
 }
 
 
+.profile__flexbox {
+    display: flex;
+    justify-content: center;
+}
+
 .profile__head {
     background-color: #AAB8C2;
     height: 70px;

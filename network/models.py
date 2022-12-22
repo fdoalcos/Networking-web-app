@@ -10,9 +10,9 @@ class Post(models.Model):
     users = models.ForeignKey(User, on_delete = models.CASCADE, related_name="users")
     Inbox = models.TextField(max_length=300)
     Image = models.ImageField(upload_to='images/', blank=True, null=True)
-    Created = models.DateTimeField(auto_now_add=True)
+    Created = models.DateTimeField(auto_now_add=True, null=True)
     Updated = models.TimeField(auto_now=True)
-    liked = models.ManyToManyField(User, null=True, related_name="like")
+    liked = models.ManyToManyField(User, null=True, blank=True, related_name="like")
 
     def __str__(self):
         return f"({self.id}){self.users}'s inbox"
