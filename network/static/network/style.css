@@ -672,6 +672,18 @@ img {
     margin-top: -3rem;
 }
 
+.edit__main {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid black;
+    font-size: 17px;
+    margin: 10px 0;
+    height: 61px;
+    /* height: auto; */
+    resize: none;
+    overflow: hidden;
+}
+
 .modal-below-edit {
     margin: 0 0 -20px 0;
 }
@@ -717,6 +729,23 @@ img {
     background-size: cover;
     background-repeat: no-repeat; */
     /* border-radius: 5px 5px 0 0; */
+}
+
+.profile__edithead {
+    background-color: #AAB8C2;
+    height: 170px;
+}
+
+.profile__editimage {
+    margin-left: 10px;
+    margin-top: -50px;
+}
+
+.profile__editimages {
+    width: 7rem;
+    height: 7rem;
+    border: 3px solid white;
+    border-radius: 50% !important;
 }
 
 .h-200 {

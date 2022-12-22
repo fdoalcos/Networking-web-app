@@ -37,7 +37,7 @@ class Profile(models.Model):
     Follow = models.ManyToManyField(User, blank=True, null=True, related_name="follows")
     Background_pic = models.ImageField(upload_to='images/', null=True, blank=True)
     Profile_pic = models.ImageField(upload_to='images/', null=True, blank=True)
-    Born = models.CharField(blank=True, max_length=160)
+    Born = models.DateField(blank=True, max_length=160)
     Occupation = models.CharField(blank=True, max_length=160)
     Status = models.CharField(blank=True, max_length=160, choices=status)
     Bio = models.CharField(blank=True, max_length=160)

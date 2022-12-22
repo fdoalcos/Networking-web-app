@@ -7,48 +7,6 @@
     <!-- profile page -->
     <div>
         <div>
-            <!-- still a bug -->
-            <div>
-                <!-- this is the follow function before, now updating it -->
-                <!-- {% if request.user != user and not check %}
-                    <form action="{% url 'follow' user.id %}">
-                        {% csrf_token %}
-                        <button >Follow</button> -->
-                        <!-- <input type="submit" name="follow" value="Follow"> -->
-                    <!-- </form>
-                {% elif request.user != user and check %}
-                    <form action="{% url 'follow' user.id %}">
-                        {% csrf_token %}
-                        <button>Unfollow</button> -->
-                        <!-- <input type="submit" name="unfollow" value="Unfollow"> -->
-                <!-- {% endif %} -->
-                
-
-
-            </div>
-            <!-- this is for news profile etc -->
-
-            
-            <!-- end profile -->
-            <!-- {% for post in posts %} -->
-                <!-- <div><p>{{ post.users }}</p></div>
-                <div>
-                    <input type="button" class="edit_button"  value="Edit" name="edit" id="inbox_{{ post.id }}" data-id="{{ post.id }}">
-                </div>
-                <div id="div_{{ post.id }}">
-                    <p id="body_{{ post.id }}">{{ post.Inbox }}</p>
-                    {% if post.Image %}
-                        <img id="image_{{ post.id }}" src="{{ post.Image.url }}" alt="image" width=100>
-                    {% endif %}
-                        <div>
-                            {% if request.user in post.liked.all %}
-                                <button id="like_{{ post.id }}" data-id="{{ post.id }}"><i class="bi bi-hand-thumbs-up"></i>Unlike</button><div id="count_{{ post.id }}">{{ post.count }}</div>
-                            {% else %}
-                                <button id="like_{{ post.id }}" data-id="{{ post.id }}"><i class="bi bi-hand-thumbs-up"></i>Like</button><div id="count_{{ post.id }}">{{ post.count }}</div>
-                            {% endif %}
-                        </div>
-                </div> 
-                {% endfor %}-->
         </div>
         <!-- test only -->
         <div>
@@ -308,11 +266,56 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                                 </div>
+                                                <div class="profile__headimage">
+                                                    <div class="profile__edithead">
+                                                        <!-- box -->
+                                                    </div>
+                                                    <div class="profile__editimage ">
+                                                        <div class="profile__editimages">
+                                                            <!-- image -->
+                                                            {% if user.userProfile.Profile_pic %}
+                                                                <img class="profile__userimage rounded__circle" id="Profile_pic" src="{{ user.userProfile.Profile_pic.url }}" alt="image" width=70>
+                                                            {% else %}
+                                                                <img class="profile__userimage rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=70>
+                                                            {% endif %}
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                                
                                                 <div class="modal-body">
                                                     <!-- body of modals -->
                                                     <form action="{% url 'profileEdit' request.user.id %}" method="POST">
                                                         {% csrf_token %}
-                                                        {{ editforms.as_p }}
+                                                       
+                                                        <!-- {{ editforms.as_p }} -->
+                                                        <div class="form-floating mb-3">
+                                                            <textarea class="form-control" name="Bio" placeholder="Leave a comment here" id="Bio" style="height: 110px">{{ editforms.Bio.value }}</textarea>
+                                                            <!-- <input type="textarea" class="form-control" id="Bio" name="Bio" value="{{ editforms.Bio.value }}" placeholder="name@example.com" rows="3"> -->
+                                                            <label for="Bio">Bio</label>
+                                                        </div>
+
+                                                        <div class="form-floating mb-3">
+                                                            <input type="text" class="form-control" id="Location" name="Location" value="{{ editforms.Location.value }}" placeholder="name@example.com">
+                                                            <label for="Location">Location</label>
+                                                        </div>
+                                                        <div class="form-floating mb-3">
+                                                            <input type="text" class="form-control" id="Occupation" name="Occupation" value="{{ editforms.Occupation.value }}" placeholder="name@example.com">
+                                                            <label for="Occupation">Occupation</label>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            {% render_field editforms.Status class="form-select" %}
+                                                        </div>
+                                                        <div class="form">
+
+                                                            <input type="date" name="Born" class="" value="{{ editforms.Born.value.year }}-{{ editforms.Born.value.month }}-{{ editforms.Born.value.day }}">
+                                                            <!-- {{ editforms.Born.value.day }}  -->
+                                                        </div>
+                                                       
+                                                        
+                                                        
+
+
                                                         <!-- <input type="submit"> -->
                                                         <div class="modal-footer modal-below">
                                                             <button type="button" class="button btn__danger" data-bs-dismiss="modal">Close</button>                                    
