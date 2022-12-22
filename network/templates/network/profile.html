@@ -102,7 +102,7 @@
                                             <!-- Modal for Background Image -->
                                             <div class="modal fade" id="staticBackdropBackgroundImage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
+                                                <div class="modal-content" style="border-radius: 10px;">
                                                     <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLongTitle">Add Background Image</h5>
                                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -158,7 +158,7 @@
                                                 <!-- Modal for Image -->
                                                 <div class="modal fade" id="staticBackdropImage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
+                                                    <div class="modal-content" style="border-radius: 10px;">
                                                         <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLongTitle">Add Profile Image</h5>
                                                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -258,32 +258,34 @@
                                         <!-- modal for edit -->
                                     
                                         <div class="modal fade" id="staticBackdropProfileEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <div class="modal-content">
+                                            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-size" role="document" style="max-width: 570px;">
+                                            <div class="modal-content" style="border-radius: 10px;">
                                                 <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLongTitle">Create post</h5>
                                                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                                 </div>
-                                                <div class="profile__headimage">
-                                                    <div class="profile__edithead">
-                                                        <!-- box -->
-                                                    </div>
-                                                    <div class="profile__editimage ">
-                                                        <div class="profile__editimages">
-                                                            <!-- image -->
-                                                            {% if user.userProfile.Profile_pic %}
-                                                                <img class="profile__userimage rounded__circle" id="Profile_pic" src="{{ user.userProfile.Profile_pic.url }}" alt="image" width=70>
-                                                            {% else %}
-                                                                <img class="profile__userimage rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=70>
-                                                            {% endif %}
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
                                                 
+                                                 
                                                 <div class="modal-body">
+                                                    <!-- head of the modal -->
+                                                    <div class="profile__headimage">
+                                                        <div class="profile__edithead">
+                                                            <!-- box -->
+                                                        </div>
+                                                        <div class="profile__editimage ">
+                                                            <div class="profile__editimages">
+                                                                <!-- image -->
+                                                                {% if user.userProfile.Profile_pic %}
+                                                                    <img class="profile__userimage rounded__circle" id="Profile_pic" src="{{ user.userProfile.Profile_pic.url }}" alt="image" width=70>
+                                                                {% else %}
+                                                                    <img class="profile__userimage rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=70>
+                                                                {% endif %}
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
                                                     <!-- body of modals -->
                                                     <form action="{% url 'profileEdit' request.user.id %}" method="POST">
                                                         {% csrf_token %}
@@ -369,7 +371,7 @@
                                 <!-- Modal for post -->
                                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
+                                    <div class="modal-content" style="border-radius: 10px;">
                                         <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLongTitle">Create post</h5>
                                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -450,7 +452,6 @@
                                         <p class="post__calendar">10 November at 10:22</p>
                                     </div>
                                     <div class="post__edit">
-                                            <!-- <input type="button" class="edit__button"  value="Edit" name="edit" id="inbox_{{ inbox.id }}" data-id="{{ inbox.id }}" data-bs-toggle="modal" data-bs-target="#staticBackdropedit{{ inbox.id }}"> -->
                                             <!-- edit button dropdown -->
                                             <div class="btn-group edit__button">
                                                 <button class="edit__buttondropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -464,6 +465,7 @@
                                                     {% endif %}
                                                 </ul>
                                             </div>
+                                            
                                             <!-- end button -->
                                     </div>
                                 </div>
@@ -551,7 +553,7 @@
                         <!-- modal for edit -->
                     <div class="modal fade" id="staticBackdropedit{{ inbox.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
+                            <div class="modal-content" style="border-radius: 10px;">
                             <div class="modal-header">
                               <h5 class="modal-title" id="staticBackdropLabel">Edit Post</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 })
                 .then(data => {
-                    if (data.success === "successful"){
+                    // if (data.success === "successful"){
                         // close data 
                         // not yet final 
 
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         // document.querySelector(`#count_${id}`).style.display = 'block';
                         document.getElementById(`body_${id}`).innerHTML = data.inbox
 
-                    }
+                    // }
                 })
             });
 

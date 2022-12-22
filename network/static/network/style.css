@@ -109,10 +109,15 @@ img {
 
 }
 
+
 .profile__head {
     background-color: #AAB8C2;
     height: 70px;
     border-radius: 5px 5px 0 0;
+}
+
+.profile__headimage {
+    margin: -.95rem -.95rem 1rem -.95rem;
 }
 
 .profile__image {
@@ -849,6 +854,16 @@ img {
     font-size: 0.950rem;
     font-weight: 300;
     color: black;
+}
+
+/* modal */
+
+.modal-size {
+    max-width: 570px;
+}
+
+.modal-content {
+    border-radius: 10px;
 }
 
 
