@@ -201,13 +201,18 @@ def profileBackground(request, profile_id):
         return HttpResponseRedirect(reverse('profile', args=[profile_id]))
 
 def profileEdit(request, edit_id):
+    user = User.objects.get(id=request.user.id)
     profile = Profile.objects.get(id=edit_id - 1)
 
     if request.method == "POST":
         form = Editform(request.POST)
         if form.is_valid():
-            # instance = form.save(commit=False)
-            # instance.Users = profile.Users
+            # change user's username
+            user.username = request.POST['Username']
+            # print(request.POST['Username'])
+            user.save()
+
+            # change user's profile
             profile.Bio = request.POST["Bio"]
             profile.Location = request.POST["Location"]
             profile.Born = request.POST["Born"]
