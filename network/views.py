@@ -31,7 +31,11 @@ def index(request):
     
     # comments about post
     commentform = Commentform()
-    # comment = Comment.objects.filter(comment_post=instance.id)
+
+    # check how many user's follower, following, and posts
+    followersCount = request.user.follows.all().count()
+    followingCount = request.user.followed.all().count()
+    PostsCount = Post.objects.filter(users=request.user).count()
 
     if request.method == "POST":
         form = Inboxform(request.POST, request.FILES)
@@ -53,7 +57,10 @@ def index(request):
         'Posts': Posts,
         "nums": nums,
         "comment": comment,
-        "users": users
+        "users": users,
+        "followersC": followersCount,
+        "followingC": followingCount,
+        "postsC": PostsCount
     })
 
 
@@ -143,6 +150,7 @@ def profile(request, user_id):
     user = User.objects.get(id=user_id)
     post = Post.objects.filter(users=user)
     profile = Profile.objects.get(id=user_id - 1)
+    users = User.objects.all()
 
     # check if user exists
     check = mainuser.followed.filter(Users=user).exists()
@@ -169,6 +177,7 @@ def profile(request, user_id):
         "user": user,
         "profile": profile,
         "check": check,
+        "users": users,
         "form": form,
         "forms": commentform,
         "editforms": forms,

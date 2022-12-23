@@ -252,11 +252,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.log("I'm True");
                     // swap
                     document.querySelector(`#follow_${id}`).innerHTML = 'Follow';
+                    document.querySelector(`#follow_${id}`).className = 'inbox__follow'
+
                 }
                 else {
                     console.log("I'm False");
                     // swap
                     document.querySelector(`#follow_${id}`).innerHTML = 'Unfollow';
+                    document.querySelector(`#follow_${id}`).className = 'inbox__unfollow'
                 }
             })
             

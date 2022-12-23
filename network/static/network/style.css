@@ -31,6 +31,10 @@ img {
     height: 3rem;
 }
 
+.post__imagepost {
+    margin-bottom: 10px;
+}
+
 .rounded__circle {
     border-radius: 50% !important; 
 }
@@ -42,7 +46,7 @@ img {
 }
 
 .index__profilepad {
-    
+    /* code */
 }
 
 .index__profile {
@@ -88,6 +92,10 @@ img {
     margin-bottom: 20px;
 }
 
+.post__edit {
+    margin-left: auto;
+}
+
 .post__email {
     margin-top: -19px;
     font-weight: 300;
@@ -109,10 +117,22 @@ img {
 
 }
 
+.index__profilemain {
+    /* margin-left: 2rem; */
+    margin-right: 2rem;
+    width: 750px;
+}
+
 
 .profile__flexbox {
     display: flex;
     justify-content: center;
+}
+
+.profile__information {
+    display: flex;
+    gap: 13px;
+    color: rgba(0, 0, 0, 0.75);
 }
 
 .profile__head {
@@ -165,7 +185,18 @@ img {
     position: absolute;
     right: 2.5%;
     bottom: 5%;
+    padding: 5px 17px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid rgb(207, 217, 222);
+    font-weight: 500;
+    transition: 0.3s;
 }
+
+.profile__button:hover {
+    background-color: #f7f7f7;
+}
+
 
 .profile__imagebutton {
     margin: none;
@@ -220,10 +251,38 @@ img {
     gap: 1rem !important;
 }
 
+.profile__followingnumber {
+    font-weight: bold;
+}
+
+.profile__followingword {
+    color: rgba(0, 0, 0, 0.75);
+}
+
 .profile__follows {
     display: flex;
     align-items: center;
     gap: 1.5rem !important;
+}
+
+.profile__padding {
+    /* border: 1px solid black; */
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
+}
+
+.profile__about {
+    padding: 20px;
+}
+
+.profile__aboutbody {
+    color: rgba(0, 0, 0, 0.75)
+}
+
+.profile__opacity {
+    opacity: 0.95;
 }
 
 .profile__post {
@@ -259,8 +318,16 @@ img {
     margin: 20px 0;
 }
 
-.profile__number {
+.profile__fullname {
     margin: 0;
+}
+
+.profile__fullemail {
+    margin: -5px 0 15px 0;
+    color: rgba(0, 0, 0, 0.75)
+}
+
+.profile__number {
     font-weight: 700;
 }
 
@@ -326,6 +393,44 @@ img {
     outline: none;
     resize: none;
     overflow: hidden;
+}
+
+.inbox__follow {
+    padding: 6px 17px;
+    background-color: black;
+    border-radius: 30px;
+    border: 1px solid rgb(207, 217, 222);
+    font-weight: 500;
+    transition: 0.3s;
+    color: white;
+    transition: 0.3s;;
+}
+
+.inbox__follow:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.inbox__unfollow {
+    /* code */
+    padding: 6px 17px;
+    background-color: white;
+    border-radius: 30px;
+    border: 1px solid rgba(214, 41, 62, 0.1);
+    font-weight: 500;
+    transition: 0.3s;
+    color: #d6293e;
+    transition: 0.3s;
+}
+
+.inbox__unfollow:hover {
+    padding: 6px 17px;
+    background-color: rgba(214, 41, 62, 0.1);
+    border-radius: 30px;
+    border: 1px solid rgba(214, 41, 62, 0.1);
+    font-weight: 500;
+    transition: 0.3s;
+    color: #d6293e;
+    transition: 0.3s;
 }
 
 .modal-below {
@@ -431,12 +536,32 @@ img {
     display: block;
     margin-right: auto;
     /* margin-left: auto; */
-    width: 300px;
+    width: 350px;
     height: 100%;
     background-color: white;
     border-width: 1px;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.news__mains {
+    display: block;
+    margin-right: auto;
+    /* margin-left: auto; */
+    width: 350px;
+    height: 100%;
+    /* background-color: white; */
+    /* border-width: 1px; */
+    /* border-radius: 5px; */
+    /* box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px; */
+}
+
+.news__profilemain {
+    /* border: 1px solid; */
+    padding: 1px 0;
+    background-color: white; 
+    border-radius: 5px;
+     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
 .post__main {
@@ -677,6 +802,19 @@ img {
     margin-left: auto;
 }
 
+.edit__profilebuttons {
+    padding: 5px 17px;
+    background-color: white;
+    border-radius: 30px;
+    border: 1px solid rgb(207, 217, 222);
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.edit__profilebuttons:hover {
+    background-color: rgba(15, 20, 25, 0.1);
+}
+
 .edit__button {
     margin-left: 22rem;
     margin-top: -3rem;
@@ -869,6 +1007,12 @@ img {
 
 .modal-content {
     border-radius: 10px;
+}
+
+/* i-tag here */
+
+.i-tag {
+    margin-right: 5px;
 }
 
 
