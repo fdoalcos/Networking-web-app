@@ -524,11 +524,23 @@
                                     <h1 class="news__headline">About</h1>
                                 </div>
                                 <div>
-                                    <p>{{ user.userProfile.Bio }}</p>
+                                    {% if user.userProfile.Bio %}
+                                        <p>{{ user.userProfile.Bio }}</p>
+                                    {% else %}
+                                        <p>I'd love to change the world, but they won’t give me the source code.</p>
+                                    {% endif %}
                                 </div>
                                 <div>
-                                    <p><i class="bi i-tag bi-calendar-date"></i> Born: <b class="profile__opacity">{{ user.userProfile.Born }}</b></p>
-                                    <p><i class="bi i-tag bi-heart"></i> Status: <b class="profile__opacity">{{ user.userProfile.Status }}</b></p>
+                                    {% if user.userProfile.Born %}
+                                        <p><i class="bi i-tag bi-calendar-date"></i> Born: <b class="profile__opacity">{{ user.userProfile.Born }}</b></p>
+                                    {% else %}
+                                        <p><i class="bi i-tag bi-calendar-date"></i> Born: <b class="profile__opacity">May 2020</b></p>
+                                    {% endif %}
+                                    {% if user.userProfile.Status %}
+                                        <p><i class="bi i-tag bi-heart"></i> Status: <b class="profile__opacity">{{ user.userProfile.Status }}</b></p>
+                                    {% else %}
+                                        <p><i class="bi i-tag bi-heart"></i> Status: <b class="profile__opacity">Single</b></p>
+                                    {% endif %}
                                     <p><i class="bi i-tag bi-envelope"></i> Email: <b class="profile__opacity">{{ user.email }}</b></p>
                                 </div>
 

@@ -215,10 +215,27 @@
                                     <img class="post__imagepost" id="image_{{ inbox.id }}" src="{{ inbox.Image.url }}" alt="image" width=100>
                                 {% endif %}
                             </div>
-                            <div class="post__info" id="count_{{ inbox.id }}">
-                                {% if inbox.count != 0 %}
-                                    <img src="https://static-exp1.licdn.com/sc/h/8ekq8gho1ruaf8i7f86vd1ftt" style="width: 20px;"alt="like-image"> {{ inbox.count }}
-                                {% endif %}
+                            <div class="post__info" >
+                                <div id="count_{{ inbox.id }}">
+                                    {% if inbox.count != 0 %}
+                                        <img src="https://static-exp1.licdn.com/sc/h/8ekq8gho1ruaf8i7f86vd1ftt" style="width: 20px;"alt="like-image"> {{ inbox.count }}
+                                    {% endif %}
+                                </div>
+                                <div class="post__commentinfo">
+                                    {% if inbox.comment_post.all.count %}
+                                        <p id="posts__commentcounts_{{ inbox.id }}" data-id="{{ inbox.id }}" style="margin: 0;">
+                                            {{ inbox.comment_post.all.count }}
+
+                                            {% if inbox.comment_post.all.count == 1 %}
+                                                comment
+                                            {% elif inbox.comment_post.all.count > 1 %} 
+                                                comments
+                                            {% endif %}
+                                        </p>
+                                    {% else %}
+                                        <p id="post__commentcounts_{{ inbox.id }}" style="margin: 0;"></p>
+                                    {% endif %}
+                                </div>
                             </div>
                                     
                         </div>

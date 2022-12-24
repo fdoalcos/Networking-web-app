@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // not yet final
 
+
             // document.querySelector(`#count_${id}`).style.display = 'none';
             // let div = document.getElementById(`div_${id}`);
             // let input = document.createElement("textarea");
@@ -271,8 +272,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // console.log("I'm clicked")
             let value = document.getElementById(`post__commentform_${id}`).value;
             let div = document.getElementById(`comments_${id}`)
-            // let user = document.getElementById('comment_user')
-            // let userComment = document.getElementById('comment_comment')
             console.log(div)
             console.log(`this is the value ${value}`)
             fetch(`/comment/${id}`, {
@@ -307,11 +306,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 console.log(`this is ${div2}`)
                 div.append(div2)
+
+                console.log(document.getElementById(`posts__commentcounts_${id}`))
+
                 
-                // div.append(data.user + "\n")
-                // div.appendChild(document.createElement("BR"));
-                // div.append(data.comment + "\n")
-                // div.appendChild(document.createElement("BR"));
+                if (data.count <= 0) {
+                    document.getElementById(`post__commentcounts_${id}`).style.display = "none"
+                } else if (data.count === 1) {
+                    document.getElementById(`post__commentcounts_${id}`).innerHTML = `${data.count} comment`
+                } else {
+                    document.getElementById(`post__commentcounts_${id}`).innerHTML = `${data.count} comments`
+                }
             })
             
             document.getElementById(`post__commentform_${id}`).value = '';
@@ -350,6 +355,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        }
+
+        if (element.id.startsWith('posts__comment')) {
+            // console.log("I'm clicked");
+            let id = element.dataset.id
+            console.log(`This is the id: ${id}`)
+            let div = document.getElementById(`start-comment_${id}`)
+            div.style.display = "block";
         }
 
 

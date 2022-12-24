@@ -16,15 +16,17 @@ from .models import User, Post, Profile, Comment
 @csrf_exempt
 def index(request):
 
+    # index page or the main page of the Web App
+
     user = User.objects.get(id=request.user.id)
     users = User.objects.all()
     form = Inboxform()
-    post = Post.objects.all()
+    post = Post.objects.all().order_by('id').reverse()
     posts = reversed(list(post))
     check = user.like.all()
 
     #Set up Pagination
-    p = Paginator(Post.objects.all(), 30)
+    p = Paginator(Post.objects.all().order_by('id').reverse(), 30)
     page = request.GET.get('page')
     Posts = p.get_page(page)
     nums = "a" * Posts.paginator.num_pages
@@ -46,13 +48,15 @@ def index(request):
             return HttpResponseRedirect(reverse("index"))
             form = Inboxform()
 
+    # name = request.POST["Name"]
+
     
 
 
     return render(request, "network/index.html", {
         'form': form,
         'forms': commentform,
-        'inbox': posts,
+        'inbox': post,
         'check': check,
         'Posts': Posts,
         "nums": nums,
@@ -85,11 +89,15 @@ def login_view(request):
 
 
 def logout_view(request):
+
+    #Log out users
     logout(request)
     return HttpResponseRedirect(reverse("index"))
 
 
 def register(request):
+
+    #register users here 
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
@@ -120,6 +128,7 @@ def register(request):
 @csrf_exempt
 def liked(request, like_id):
     
+    # set up a REST API like function here that would able to communicate with the client side
     user = request.user
 
     try:
@@ -127,7 +136,6 @@ def liked(request, like_id):
     except Post.DoesNotExist:
         return JsonResponse({"error": "Post does not exist"}, status=404)
 
-    # if post.liked.filter(id=request.user.id):
     if post.isliked(user):
         post.liked.remove(request.user)
         islike = False
@@ -140,15 +148,12 @@ def liked(request, like_id):
     return JsonResponse({'islike': islike, 'count': count}, status=200)
 
 
-
-
-def unlike(request, like_id):
-    pass
-
 def profile(request, user_id):
+
+    # The profile page of the main acc
     mainuser = User.objects.get(id=request.user.id)
     user = User.objects.get(id=user_id)
-    post = Post.objects.filter(users=user)
+    post = Post.objects.filter(users=user).order_by('id').reverse()
     profile = Profile.objects.get(id=user_id - 1)
     users = User.objects.all()
 
@@ -189,6 +194,7 @@ def profile(request, user_id):
     
 def profilePost(request, user_id):
 
+    # Whenever you post something inside your main profile
     if request.method == "POST":
         form = Inboxform(request.POST, request.FILES)
         if form.is_valid():
@@ -199,6 +205,8 @@ def profilePost(request, user_id):
             form = Inboxform()
 
 def profileBackground(request, profile_id):
+
+    # Post Background picture in main profile
     profile = Profile.objects.get(id=profile_id - 1)
 
     if request.method == "POST":
@@ -209,6 +217,8 @@ def profileBackground(request, profile_id):
         return HttpResponseRedirect(reverse('profile', args=[profile_id]))
 
 def profileEdit(request, edit_id):
+
+    # when you want to edit your profile information
     user = User.objects.get(id=request.user.id)
     profile = Profile.objects.get(id=edit_id - 1)
 
@@ -232,6 +242,8 @@ def profileEdit(request, edit_id):
 
 @csrf_exempt
 def follow(request, follow_id):
+
+    # Follow user and unfollow them
     user = User.objects.get(id=request.user.id)
     following_user = User.objects.get(id=follow_id)
     profile = Profile.objects.get(Users=following_user)
@@ -254,12 +266,12 @@ def follow(request, follow_id):
         return JsonResponse({'check': check, 'followersC': followersCount, 'followingC': followingCount, 'successful': "successful"}, status=200)
     # return HttpResponseRedirect(reverse('profile', args=[follow_id]))
 
-def unfollow(request, follow_id):
-    pass
 
 @csrf_exempt
 def edit(request, edit_id):
-     # Query for requested email
+
+    # edit the page 
+    # Query for requested email
     try:
         edit = Post.objects.get(pk=edit_id)
     except Post.DoesNotExist:
@@ -282,6 +294,7 @@ def edit(request, edit_id):
 @csrf_exempt
 def comment(request, comment_id):
 
+    # How you comment in the page
     try:
         post = Post.objects.get(pk=comment_id)
     except Post.DoesNotExist:
@@ -292,6 +305,7 @@ def comment(request, comment_id):
         data = json.loads(request.body)
         value = data['body']
 
+        count = post.comment_post.all().count() + 1
         user = User.objects.get(id=request.user.id)
         comment = Comment(comment_post=post, username=request.user, comment=value)
         comment.save()
@@ -301,9 +315,11 @@ def comment(request, comment_id):
         except:
             Image = "https://social.webestica.com/assets/images/avatar/placeholder.jpg"
 
-        return JsonResponse({'user': str(user), 'image': Image, 'comment': value, 'success': "successful"}, status=200)
+        return JsonResponse({'user': str(user), 'image': Image, 'comment': value, 'count': count, 'success': "successful"}, status=200)
 
 def following_post(request):
+
+    # Check your post following
     user = User.objects.get(id=request.user.id)
     following = user.followed.all()
     exists = user.followed.all().exists()
