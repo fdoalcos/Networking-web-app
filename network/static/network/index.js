@@ -254,6 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // swap
                     document.querySelector(`#follow_${id}`).innerHTML = 'Follow';
                     document.querySelector(`#follow_${id}`).className = 'inbox__follow'
+                    document.getElementById(`followersCount_${id}`).innerHTML = `<b>${data.followersC - 1}</b> Followers`
 
                 }
                 else {
@@ -261,6 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // swap
                     document.querySelector(`#follow_${id}`).innerHTML = 'Unfollow';
                     document.querySelector(`#follow_${id}`).className = 'inbox__unfollow'
+                    document.getElementById(`followersCount_${id}`).innerHTML = `<b>${data.followersC + 1}</b> Followers`
                 }
             })
             
