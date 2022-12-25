@@ -315,9 +315,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.count <= 0) {
                     document.getElementById(`post__commentcounts_${id}`).style.display = "none"
                 } else if (data.count === 1) {
-                    document.getElementById(`post__commentcounts_${id}`).innerHTML = `${data.count} comment`
-                } else {
                     document.getElementById(`post__commentcounts_${id}`).innerHTML = `${data.count} comments`
+                } 
+                else {
+                    document.getElementById(`posts__commentcounts_${id}`).innerHTML = `${data.count} comments`
                 }
             })
             
