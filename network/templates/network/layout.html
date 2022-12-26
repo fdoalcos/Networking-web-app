@@ -16,38 +16,6 @@
 
     </head>
     <body class="main_body">
-
-        <nav class="social__navbar navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Network</a>
-
-            <div class="ml-auto">
-              <ul class="navbar-nav">
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile' request.user.id %}" id="mainUser"><strong>{{ request.user.username }}</strong></a>
-                    </li>
-                {% endif %}
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'index' %}" id="all__post">All Posts</a>
-                </li>
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'following' %}">Following</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register' %}">Register</a>
-                    </li>
-                {% endif %}
-              </ul>
-            </div>
-          </nav>
           <nav class="social__navbar navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
               <a class="navbar-brand" href="#">Network</a>
@@ -55,12 +23,12 @@
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <ul class="navbar-nav ml-auto">
-                    {% if user.is_authenticated %}
+                <ul class="navbar-nav social__nav ml-auto">
+                    <!-- {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'profile' request.user.id %}" id="mainUser"><strong>{{ request.user.username }}</strong></a>
                     </li>
-                    {% endif %}
+                    {% endif %} -->
                     <li class="nav-item">
                     <a class="nav-link" href="{% url 'index' %}" id="all__post">All Posts</a>
                     </li>
@@ -68,9 +36,54 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'following' %}">Following</a>
                         </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="{% url 'profile' request.user.id %}" id="mainUser"><strong>{{ request.user.username }}</strong></a>
+                        </li> -->
+                        <!-- <li class="nav-item">
+                            <div class="btn-group ">
+                                <button class="" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ request.user }}
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-item">
+                                        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                        </li> -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                            <div class="dropdown">
+                                <a class="social__image nav-link" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {% if request.user.userProfile.Profile_pic %}
+                                        <img class="main__image social__radius" id="Profile_pic" src="{{ request.user.userProfile.Profile_pic.url }}" alt="image" width=50>
+                                    {% else %}
+                                        <img class="main__image social__radius" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=50>
+                                    {% endif %}
+                                </a>
+        
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-item"><a class="nav-link" href="{% url 'profile' request.user.id %}" id="mainUser">My Profile</a></li>
+                                    <li class="dropdown-item"><a class="nav-link" href="{% url 'register' %}">Logout</a></li>
+                                </ul>
+                            </div>
                         </li>
+                        
+                        <!-- <div class="btn-group edit__button">
+                            <button class="edit__buttondropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            ...
+                            </button>
+                            <ul class="dropdown-menu">
+                                {% if inbox.users == request.user %}
+                                    <li class="dropdown-item" id="inbox_{{ inbox.id }}" data-id="{{ inbox.id }}" data-bs-toggle="modal" data-bs-target="#staticBackdropedit{{ inbox.id }}">Edit post</li>
+                                {% else %}
+                                    <li class="dropdown-item">Cannot edit post</li>
+                                {% endif %}
+                            </ul>
+                        </div> -->
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                        </li> -->
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'login' %}">Log In</a>

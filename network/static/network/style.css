@@ -1031,8 +1031,23 @@ img {
 /* navbar here  */
 
 .social__navbar {
-    padding: 15px 20px !important;
+    padding: 10px 20px !important;
     box-shadow: rgb(0 0 0 / 5%) 0px 6px 24px 0px, rgb(0 0 0 / 8%) 0px 0px 0px 1px;
+}
+
+.social__nav {
+    display: flex;
+    align-items: center;
+}
+
+.social__image {
+    /* margin-right: 10px; */
+    width: 3.95rem;
+    /* border-radius: 10px; */
+}
+
+.social__radius {
+    border-radius: 10px;
 }
 
 
