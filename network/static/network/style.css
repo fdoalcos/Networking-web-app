@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:wght@200;300;400&family=Nunito+Sans:ital@1&family=Open+Sans&family=Poppins:wght@300;400;500;600&family=Roboto:ital,wght@0,300;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato&family=Montserrat:wght@200;300;400&family=Nunito+Sans:ital@1&family=Open+Sans&family=Poppins:wght@300;400;500;600&family=Roboto:ital,wght@0,300;1,900&display=swap');
 
 
 body {
@@ -1152,5 +1152,87 @@ img {
 
 /* login */
 
-.login__main
+.login__start {
+    /* code */
+}
+
+.login__main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.login__box {
+    /* border: 1px solid black; */
+    width: 350px;
+    background-color: white;
+}
+
+.login__backgroundimage {
+    /* position: absolute; */
+    /* height: 200px !important; */
+    width: 100%;
+    height: 120px;;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
+    
+}
+
+.login__index {
+    font-size: 1.5rem;
+}
+
+.login__index {
+    /* border: 1px solid black; */
+    padding: 30px 30px 20px 30px;
+}
+
+.login__button {
+    display: flex;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 20px;
+    justify-content: center;
+    height: 45px;
+    color: #fff;
+    align-items: center;
+    width: 100%;
+    background-color: #90EE90;
+    border-color: #90EE90;
+    border: none;
+}
+
+.login__footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 30px 0;
+}
+
+/* register */
+
+.register__start {
+    /* code */
+}
+
+.register__main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register__box {
+    border: 1px solid black;
+}
+
+.register__index {
+    border: 1px solid black;
+}
+
+.register_footer {
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
+}
 

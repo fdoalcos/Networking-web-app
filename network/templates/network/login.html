@@ -2,26 +2,33 @@
 
 {% block body %}
 
-    <h2>Login</h2>
 
     {% if message %}
         <div>{{ message }}</div>
     {% endif %}
 
-    <div class="login__main">
-        <form action="{% url 'login' %}" method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                <input autofocus class="form-control" type="text" name="username" placeholder="Username">
+    <div class="login__start">
+        <div class="login__main">
+            <div class="login__box">
+                <img class="login__backgroundimage" id="Profile_pic" src="/static/network/emoji.jpg" alt="image" width=70>
+                <div class="login__index">
+                    <p class="login__header">Login</p>
+                    <form action="{% url 'login' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input autofocus class="form-control" type="text" name="username" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="password" name="password" placeholder="Password">
+                        </div>
+                        <input class="login__button" type="submit" value="Login">
+                    </form>
+                </div>
+                <div class="login__footer">Don't have an account? <a href="{% url 'register' %}">Register here.</a></div>
             </div>
-            <div class="form-group">
-                <input class="form-control" type="password" name="password" placeholder="Password">
-            </div>
-            <input class="btn btn-primary" type="submit" value="Login">
-        </form>
+        </div>
     </div>
     
 
-    Don't have an account? <a href="{% url 'register' %}">Register here.</a>
 
 {% endblock %}
