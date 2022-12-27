@@ -321,10 +321,13 @@ def following_post(request):
 
     # Check your post following
     user = User.objects.get(id=request.user.id)
+    users = User.objects.all()
     following = user.followed.all()
     exists = user.followed.all().exists()
+    form = Inboxform()
     post = Post.objects.all()
     commentform = Commentform()
+    
 
     if exists:
         for follow in following:
@@ -335,7 +338,9 @@ def following_post(request):
     return render(request, "network/following.html", {
         "exist": exists,
         "following": following_post,
-        "forms": commentform
+        "forms": commentform,
+        "form": form,
+        "users": users
     })
 
 

@@ -1,6 +1,7 @@
 {% extends "network/layout.html" %}
 {%  load static %}
 {% load widget_tweaks %}
+{% load humanize %}
 
 
 {% block body %}
@@ -29,7 +30,7 @@
                                             <!-- Modal for Background Image -->
                                             <div class="modal fade" id="staticBackdropBackgroundImage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content" style="border-radius: 10px;">
+                                                <div class="modal__font modal-content" style="border-radius: 10px;">
                                                     <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLongTitle">Add Background Image</h5>
                                                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -85,7 +86,7 @@
                                                 <!-- Modal for Image -->
                                                 <div class="modal fade" id="staticBackdropImage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content" style="border-radius: 10px;">
+                                                    <div class="modal__font modal-content" style="border-radius: 10px;">
                                                         <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLongTitle">Add Profile Image</h5>
                                                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -166,7 +167,7 @@
                                             <p><i class="bi bi-geo-alt"></i> {{ profile.Location }}</p>
                                         {% endif %}
                                         {% if profile.Created %}
-                                            <p><i class="bi bi-calendar-date"></i> {{ profile.Created }}</p>
+                                            <p><i class="bi bi-calendar"></i> Joined on {{ profile.Created.month }}</p>
                                         {% else %}
                                             <p><i class="bi bi-calendar"></i> Joined on Dec 2022</p>
                                         {% endif %}
@@ -191,7 +192,7 @@
                                     
                                         <div class="modal fade" id="staticBackdropProfileEdit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-size" role="document" style="max-width: 570px;">
-                                            <div class="modal-content" style="border-radius: 10px;">
+                                            <div class="modal__font modal-content" style="border-radius: 10px;">
                                                 <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLongTitle">Create post</h5>
                                                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -203,9 +204,14 @@
                                                 <div class="modal-body">
                                                     <!-- head of the modal -->
                                                     <div class="profile__headimage">
-                                                        <div class="profile__edithead">
+                                                        <!-- <div class="profile__edithead"> -->
                                                             <!-- box -->
-                                                        </div>
+                                                        <!-- </div> -->
+                                                        {% if user.userProfile.Background_pic %}
+                                                            <img class="background__images" id="Profile_pic" src="{{ user.userProfile.Background_pic.url }}" alt="image" width=70>
+                                                        {% else %}
+                                                            <img class="background__images" id="Profile_pic" src="https://social.webestica.com/assets/images/bg/05.jpg" alt="image" width=70>
+                                                        {% endif %}
                                                         <div class="profile__editimage ">
                                                             <div class="profile__editimages">
                                                                 <!-- image -->
@@ -243,11 +249,15 @@
                                                             {% render_field editforms.Status class="form-select" id="Status" %}
                                                             <label for="Status">Status</label>
                                                         </div>
-                                                        <div class="form">
-
-                                                            <input type="date" name="Born" class="" value="{{ editforms.Born.value.year }}-{{ editforms.Born.value.month }}-{{ editforms.Born.value.day }}">
-                                                            <!-- {{ editforms.Born.value.day }}  -->
+                                                        <div class="form-floating">
+                                                            <input type="date" name="Born" class="form-control" value="{{ editforms.Born.value.year }}-{{ editforms.Born.value.month }}-{{ editforms.Born.value.day }}" id="Born">
+                                                            <label for="Born">Born</label>
                                                         </div>
+                                                        <!-- <div class="form"> -->
+
+                                                            <!-- <input type="date" name="Born" class="" value="{{ editforms.Born.value.year }}-{{ editforms.Born.value.month }}-{{ editforms.Born.value.day }}"> -->
+                                                            <!-- {{ editforms.Born.value.day }}  -->
+                                                        <!-- </div> -->
                                                        
                                                         
                                                         
@@ -303,7 +313,7 @@
                                 <!-- Modal for post -->
                                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content" style="border-radius: 10px;">
+                                    <div class="modal__font modal-content" style="border-radius: 10px;">
                                         <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLongTitle">Create post</h5>
                                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -381,7 +391,12 @@
                                     </div>
                                     <div class="post__name">
                                         <a  class="post__username" href="{% url 'profile' inbox.users.id %}">{{ inbox.users }}</a>
-                                        <p class="post__calendar">10 November at 10:22</p>
+                                        <p class="post__calendar">
+                                            {% if inbox.Created %}
+                                                {{ inbox.Created | naturaltime }}
+                                            {% else %}
+                                                10 November at 10:22
+                                            {% endif %}                                        </p>
                                     </div>
                                     <div class="post__edit">
                                             <!-- edit button dropdown -->
@@ -408,10 +423,27 @@
                                             <img class="post__imagepost" id="image_{{ inbox.id }}" src="{{ inbox.Image.url }}" alt="image" width=100>
                                         {% endif %}
                                     </div>
-                                    <div class="post__info" id="count_{{ inbox.id }}">
-                                        {% if inbox.count != 0 %}
-                                            <img src="https://static-exp1.licdn.com/sc/h/8ekq8gho1ruaf8i7f86vd1ftt" style="width: 20px;"alt="like-image"> {{ inbox.count }}
-                                        {% endif %}
+                                    <div class="post__info">
+                                        <div id="count_{{ inbox.id }}">
+                                            {% if inbox.count != 0 %}
+                                                <img src="https://static-exp1.licdn.com/sc/h/8ekq8gho1ruaf8i7f86vd1ftt" style="width: 20px;"alt="like-image"> {{ inbox.count }}
+                                            {% endif %}
+                                        </div>
+                                        <div class="post__commentinfo">
+                                            {% if inbox.comment_post.all.count %}
+                                                <p id="posts__commentcounts_{{ inbox.id }}" data-id="{{ inbox.id }}" style="margin: 0;">
+                                                    {{ inbox.comment_post.all.count }}
+        
+                                                    {% if inbox.comment_post.all.count == 1 %}
+                                                        comment
+                                                    {% elif inbox.comment_post.all.count > 1 %} 
+                                                        comments
+                                                    {% endif %}
+                                                </p>
+                                            {% else %}
+                                                <p id="post__commentcounts_{{ inbox.id }}" style="margin: 0;"></p>
+                                            {% endif %}
+                                        </div>
                                     </div>
                                             
                                 </div>
@@ -470,7 +502,10 @@
                                                                 {% endif %}
                                                             </div>
                                                             <div class="comment__contents">
-                                                                <p class="comment__user" id="comment_user">{{ comment.username }}</p>
+                                                                <div class="comment__usertime">
+                                                                    <p class="comment__user" id="comment_user">{{ comment.username }}</p>
+                                                                    <p class="comment__time" id="comment_time">{{ comment.time | naturaltime }}</p>
+                                                                </div>
                                                                 <p class="comment__comment" id="comment_comment">{{ comment.comment }}</p>
                                                             </div>
                                                         </div>
@@ -485,7 +520,7 @@
                         <!-- modal for edit -->
                     <div class="modal fade" id="staticBackdropedit{{ inbox.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content" style="border-radius: 10px;">
+                            <div class="modal__font modal-content" style="border-radius: 10px;">
                             <div class="modal-header">
                               <h5 class="modal-title" id="staticBackdropLabel">Edit Post</h5>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -523,14 +558,14 @@
                                 <div>
                                     <h1 class="news__headline">About</h1>
                                 </div>
-                                <div>
+                                <div class="profile__bio">
                                     {% if user.userProfile.Bio %}
                                         <p>{{ user.userProfile.Bio }}</p>
                                     {% else %}
                                         <p>I'd love to change the world, but they won’t give me the source code.</p>
                                     {% endif %}
                                 </div>
-                                <div>
+                                <div class="profile__editinfo">
                                     {% if user.userProfile.Born %}
                                         <p><i class="bi i-tag bi-calendar-date"></i> Born: <b class="profile__opacity">{{ user.userProfile.Born }}</b></p>
                                     {% else %}

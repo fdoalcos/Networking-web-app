@@ -1,6 +1,7 @@
 {% extends "network/layout.html" %}
 {% load static %}
 {% load widget_tweaks %}
+{% load humanize %}
 
 
 {% block body %}
@@ -8,9 +9,14 @@
         <diV class="index__profile">
             <div>
                 <div class="profile__marginpad">
-                    <div class="profile__head">
+                    <!-- <div class="profile__head"> -->
                         <!-- box -->
-                    </div>
+                    <!-- </div> -->
+                    {% if user.userProfile.Background_pic %}
+                        <img class="background__pimages" id="Profile_pic" src="{{ user.userProfile.Background_pic.url }}" alt="image" width=70>
+                    {% else %}
+                        <img class="background__pimages" id="Profile_pic" src="https://social.webestica.com/assets/images/bg/05.jpg" alt="image" width=70>
+                    {% endif %}
                     <div class="profile__image ">
                         <div class="profile__images">
                             <!-- image -->
@@ -116,7 +122,7 @@
                     <!-- Modal for post -->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content" style="border-radius: 10px;">
+                        <div class="modal__font modal-content" style="border-radius: 10px;">
                             <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLongTitle">Create post</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -184,10 +190,11 @@
                                 <!-- <p class="post__calendar">10 November at 10:22</p> -->
                                 <p class="post__calendar">
                                     {% if inbox.Created %}
-                                        {{ inbox.Created }}
+                                        {{ inbox.Created | naturaltime }}
                                     {% else %}
                                         10 November at 10:22
                                     {% endif %}
+
                                 </p>
                             </div>
                             <div class="post__edit">
@@ -292,7 +299,10 @@
                                                         {% endif %}
                                                     </div>
                                                     <div class="comment__contents">
-                                                        <p class="comment__user" id="comment_user">{{ comment.username }}</p>
+                                                        <div class="comment__usertime">
+                                                            <p class="comment__user" id="comment_user">{{ comment.username }}</p>
+                                                            <p class="comment__time" id="comment_time">{{ comment.time | naturaltime }}</p>
+                                                        </div>
                                                         <p class="comment__comment" id="comment_comment">{{ comment.comment }}</p>
                                                     </div>
                                                 </div>
@@ -307,7 +317,7 @@
                 <!-- modal for edit -->
             <div class="modal fade" id="staticBackdropedit{{ inbox.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content" style="border-radius: 10px;">
+                    <div class="modal__font modal-content" style="border-radius: 10px;">
                     <div class="modal-header">
                       <h5 class="modal-title" id="staticBackdropLabel">Edit Post</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

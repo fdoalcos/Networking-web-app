@@ -300,7 +300,10 @@ document.addEventListener('DOMContentLoaded', () => {
                            
                         </div>
                         <div class="comment__contents">
-                            <p class="comment__user" id="comment_user">${data.user}</p>
+                            <div class="comment__usertime">
+                                <p class="comment__user" id="comment_user">${data.user}</p>
+                                <p class="comment__time" id="comment__time">now</p>
+                            </div>
                             <p class="comment__comment" id="comment_comment">${data.comment}</p>
                         </div>
                     </div>
@@ -402,13 +405,14 @@ function load_landingpage(type) {
             results.map(result => {
                     let title = result.title;
                     let url = result.url;
+                    let created = result.created_date
                     let div = document.getElementById("news_body");
                     let h6 = document.createElement("h6");
                     let h62 = document.createElement("h6");
                     h6.className = "news_title"
                     h6.innerHTML = `<a class="news__title" href="${url}">${title}</a>`;
                     h62.className = "news_hour"
-                    h62.innerHTML = '2hr'
+                    h62.innerHTML = '3hrs ago'
                     
 
                     div.appendChild(h6);

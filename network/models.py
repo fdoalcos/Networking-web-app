@@ -54,7 +54,7 @@ class Comment(models.Model):
     comment_post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comment_post")
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.CharField(max_length=500)
-    time = models.DateTimeField(auto_now_add=True)
+    time = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return f"{self.comment_post.users}'s post (id={self.comment_post.id})"
