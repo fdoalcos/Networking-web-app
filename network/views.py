@@ -9,6 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 
 
@@ -345,21 +346,27 @@ def following_post(request):
     PostsCount = Post.objects.filter(users=request.user).count()
     
 
-    for follow in following:
-        followings = Post.objects.filter(users=follow.Users)
-        for follows in followings:
-            inbox = follows
+    # for follow in following:
+    #     following_post = Post.objects.filter(users=follow.Users)
+        # for follows in following_post:
+        #     follow_user = follows
+        # print(following_post)
+    my_filter = Q()
+    for user in following:
+        my_filter = my_filter|Q(users=user.Users)
+    print(my_filter)
+    following_post = Post.objects.filter(my_filter).order_by('id').reverse()
 
     return render(request, "network/following.html", {
         "exist": exists,
         "following": following_post,
-        "inbox": inbox,
         "forms": commentform,
         "form": form,
         "users": users,
         "followersC": followersCount,
         "followingC": followingCount,
-        "postsC": PostsCount
+        "postsC": PostsCount,
+        "followings": following,
     })
 
 

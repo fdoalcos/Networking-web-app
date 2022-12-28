@@ -28,7 +28,7 @@
                                         <img class="profile__userimage rounded__circle" id="Profile_pic" src="https://social.webestica.com/assets/images/avatar/placeholder.jpg" alt="image" width=70>
                                     {% endif %}
                                         </div>
-                                
+
                             </div>
                             <div class="profile__body">
                                 <!-- name -->
@@ -90,7 +90,7 @@
                             {% endfor %}
                         </div>
                     </div>
-        
+
                 </diV>
                 <div class="index__main">
                     <div class="inbox__marginpad">
@@ -98,7 +98,7 @@
                             <!-- button for modal -->
                             <div>
                                 <!-- <div class="inbox__parent"> -->
-                                    
+
                                 <!-- </div> -->
                                 <!-- <div class="inbox-child">  -->
                                 <div class="inbox__start" >
@@ -114,7 +114,7 @@
                                             {% render_field form.Inbox class="inbox__main" placeholder="Share your thoughts..." type="textarea" data-bs-toggle="modal" data-bs-target="#staticBackdrop" %}
                                         </form>
                                     </diV>
-                                    
+
                                     <!-- <button type="button" class="button__inbox" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
                                         Share your thoughts...
                                     </button> -->
@@ -149,19 +149,19 @@
                                                 <p class="inbox__title">Add attachment (optional)</p>
                                             </div>
                                             <!-- <label>
-                                                
+
                                             </label> -->
                                             <div class="inbox__filemargin">
                                                 <label class="inbox__label" for="input__file">
                                                     {% render_field form.Image id="input__file" style="display: none;" class="inbox__image inbox__file" %}
                                                     <i class="bi bi-images image__tag"></i>
-                                                    <label id="image__filename" for="input__file" class="input__label">                                        
+                                                    <label id="image__filename" for="input__file" class="input__label">
                                                         Drag here or click to upload photo
-                                                    </label> 
+                                                    </label>
                                                 </label>
                                             </div>
                                             <div class="modal-footer modal-below">
-                                                <button type="button" class="button btn__danger" data-bs-dismiss="modal">Close</button>                                    
+                                                <button type="button" class="button btn__danger" data-bs-dismiss="modal">Close</button>
                                                 <input id="submit_inbox" type="submit" class="button btn__success">
                                             </div>
                                         </form>
@@ -173,7 +173,7 @@
                             <!-- endform pop up -->
                         </div>
                     </div>
-                    
+
                     <!-- start of inbox -->
                     <div>
                         {% for inbox in following %}
@@ -192,7 +192,7 @@
                                         <!-- <p class="post__calendar">10 November at 10:22</p> -->
                                         <p class="post__calendar">
                                             {% if inbox.Created %}
-                                                {{ inbox.Created | naturalday }}
+                                                {{ inbox.Created | naturaltime }}
                                             {% else %}
                                                 10 November at 10:22
                                             {% endif %}
@@ -233,10 +233,10 @@
                                             {% if inbox.comment_post.all.count %}
                                                 <p id="posts__commentcounts_{{ inbox.id }}" data-id="{{ inbox.id }}" style="margin: 0;">
                                                     {{ inbox.comment_post.all.count }}
-        
+
                                                     {% if inbox.comment_post.all.count == 1 %}
                                                         comment
-                                                    {% elif inbox.comment_post.all.count > 1 %} 
+                                                    {% elif inbox.comment_post.all.count > 1 %}
                                                         comments
                                                     {% endif %}
                                                 </p>
@@ -245,7 +245,7 @@
                                             {% endif %}
                                         </div>
                                     </div>
-                                            
+
                                 </div>
                             </div>
                             <div class="main__headerpad">
@@ -261,8 +261,8 @@
                                         <div class="post__comment">
                                             <!-- <input class="inbox__comment" id="post__comment" type="button" value="comment"><i class="bi bi-chat"></i> -->
                                             <button class="inbox__comment" id="post__comment" data-id="{{ inbox.id }}"><i class="inbox__tag bi bi-chat"></i>Comment</button>
-        
-                                        </div>  
+
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- start of comment -->
@@ -309,7 +309,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>    
+                            </div>
                             <!-- end of inbox -->
                         </div>
                         <!-- modal for edit -->
@@ -334,11 +334,11 @@
                                     </div>
                                 </form>
                                 <div class="modal-footer modal-below-edit">
-                                    <button type="button" class="button btn__danger" data-bs-dismiss="modal">Cancel</button>                                    
+                                    <button type="button" class="button btn__danger" data-bs-dismiss="modal">Cancel</button>
                                     <input id="edit__button_{{ inbox.id }}" type="submit" value="Save" data-bs-dismiss="modal" class="button btn__success">
                                 </div>
                             </div>
-                            
+
                         </div>
                         </div>
                     </div>
@@ -360,28 +360,28 @@
             <div>
                 <nav aria-label="...">
                     <ul class="pagination">
-        
+
                         {% if Posts.has_previous %}
                             <li class="page-item"><a class="page-link" href="?page={{ venues.previous_page_number }}">Previous</a></li>
-        
+
                         {% else %}
                             <li class="page-item disabled"><a class="page-link" href="?page={{ venues.previous_page_number }}">Previous</a></li>
                         {% endif  %}
-        
+
                         {% for i in nums %}
-        
+
                             {% if forloop.counter == Posts.number %}
                                 <li class="page-item active"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
                             {% else %}
                                 <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
                             {% endif %}
-        
+
                         {% endfor %}
-        
+
                         {% if Posts.has_next %}
                             <li class="page-item"><a class="page-link" href="?page={{ Posts.next_page_number }}">Next</a></li>
                         {% endif %}
-        
+
                     </ul>
                 </nav>
             </div>

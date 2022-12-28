@@ -7,7 +7,7 @@ class User(AbstractUser):
     pass
 
 class Post(models.Model):
-    users = models.ForeignKey(User, on_delete = models.CASCADE, related_name="users")
+    users = models.ForeignKey(User, on_delete = models.CASCADE, related_name="userPost")
     Inbox = models.TextField(max_length=300)
     Image = models.ImageField(upload_to='images/', blank=True, null=True)
     Created = models.DateTimeField(auto_now_add=True, null=True)
