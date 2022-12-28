@@ -338,20 +338,28 @@ def following_post(request):
     form = Inboxform()
     post = Post.objects.all()
     commentform = Commentform()
+
+     # check how many user's follower, following, and posts
+    followersCount = request.user.follows.all().count()
+    followingCount = request.user.followed.all().count()
+    PostsCount = Post.objects.filter(users=request.user).count()
     
 
-    if exists:
-        for follow in following:
-            following_post = Post.objects.filter(users=follow.Users)
-    else:
-        following_post = None
+    for follow in following:
+        followings = Post.objects.filter(users=follow.Users)
+        for follows in followings:
+            inbox = follows
 
     return render(request, "network/following.html", {
         "exist": exists,
         "following": following_post,
+        "inbox": inbox,
         "forms": commentform,
         "form": form,
-        "users": users
+        "users": users,
+        "followersC": followersCount,
+        "followingC": followingCount,
+        "postsC": PostsCount
     })
 
 
