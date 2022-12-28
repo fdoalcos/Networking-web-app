@@ -13,12 +13,16 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
         <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
     </head>
     <body class="main_body">
-          <nav class="social__navbar navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="social__navbar navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-            <a class="layout__brand navbar-brand" href="{% url 'index' %}" style="font-size: 1.5rem;              ">Network</a>
+                <div class="social__imagesmain">
+                    <img class="social__images" src="static/network/mainlogo.jpg" alt="mainlogo" width=50>
+                    <a class="layout__brand navbar-brand" href="{% url 'index' %}" style="font-size: 1.5rem; color: rgba(0, 0, 0, 0.55)">Mediafluent</a>
+                </div>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
@@ -100,7 +104,25 @@
                 </ul>
               </div>
             </div>
-          </nav>
+        </nav>
+        {% if messages %}
+            {% for message in messages %}  
+                <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+                    <strong>
+                        {% if message.tags == 'alert-warning' %}
+                            Error!
+                        {% elif message.tags == 'alert-success' %}
+                            Success!
+                        {% else %}
+                            Success!
+                        {% endif %}
+
+                    </strong> 
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
 
         <div class="body">
             {% block body %}

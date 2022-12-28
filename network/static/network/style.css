@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato&family=Montserrat:wght@200;300;400&family=Nunito+Sans:ital@1&family=Open+Sans&family=Poppins:wght@300;400;500;600&family=Roboto:ital,wght@0,300;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato&family=Lora:wght@700&family=Montserrat:wght@200;300;400&family=Nunito+Sans:ital@1&family=Open+Sans&family=Poppins:wght@300;400;500;600&family=Roboto:ital,wght@0,300;1,900&family=Source+Code+Pro:wght@900&display=swap');
 
 
 body {
@@ -24,9 +24,11 @@ img {
 }
 
 .layout__brand {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Code Pro', monospace;
     font-weight: 900;
-    font-style: italic;
+    /* font-style: italic; */
+    margin-right: auto;
+    color: rgba(0, 0, 0, 0.55)
 }
 
 .main_flex {
@@ -377,7 +379,7 @@ img {
 
 .inbox__inbox {
     /* margin: 20px 0 0 0; */
-    padding: 1rem;
+    padding: 0.990rem 1rem;
     background-color: white;
     border-width: 1px;
     border-radius: 5px 5px 0 0;
@@ -720,12 +722,13 @@ img {
     margin-left: auto;
     margin-bottom: 0;
     font-weight: 100;
+    font-size: 15px;
 }
 
 .comment__comment {
     margin: 1px 0 0 0;
     font-weight: 300;
-    font-size:15px;
+    font-size: 15px;
 }
 
 .post__commentForm {
@@ -803,6 +806,14 @@ img {
 .post__commentinfo:hover {
     text-decoration: underline rgba(0, 0, 0, 0.75);
 }
+
+/* .post__count {
+    padding: 0;
+}
+
+.post__count:hover {
+    text-decoration: underline rgba(0, 0, 0, 0.75);
+} */
 
 .liked {
     border: none;
@@ -1122,7 +1133,18 @@ img {
 .social__nav {
     display: flex;
     align-items: center;
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
+
+.social__imagesmain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social__images {
+    width: 50px;
+    margin-right: 10px;
 }
 
 .social__image {
@@ -1161,24 +1183,51 @@ img {
     align-items: center;
     justify-content: center;
     margin-top: 40px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 .login__box {
     /* border: 1px solid black; */
-    width: 350px;
+    width: 370px;
     background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
+
 
 .login__backgroundimage {
     /* position: absolute; */
     /* height: 200px !important; */
-    width: 100%;
-    height: 120px;;
+    display: flex;
+    margin: auto;
+    width: 150px;
+    /* height: 120px;;
     object-fit: cover;
-    border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0; */
     
 }
+
+.login__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    font-size: 2rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+.login__miniheader {
+    margin-top: -15px;
+    display: flex;
+    font-family: 'Roboto', sans-serif;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+}
+
+
 
 .login__index {
     font-size: 1.5rem;
@@ -1186,7 +1235,8 @@ img {
 
 .login__index {
     /* border: 1px solid black; */
-    padding: 30px 30px 20px 30px;
+    /* padding: 30px 30px 20px 30px; */
+    padding: 20px 50px 20px 50px;
 }
 
 .login__button {
@@ -1207,7 +1257,9 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 0 30px 0;
+    padding: 0 0 50px 0;
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
 }
 
 /* register */

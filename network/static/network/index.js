@@ -318,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (data.count <= 0) {
                     document.getElementById(`post__commentcounts_${id}`).style.display = "none"
                 } else if (data.count === 1) {
-                    document.getElementById(`post__commentcounts_${id}`).innerHTML = `${data.count} comments`
+                    document.getElementById(`post__commentcounts_${id}`).innerHTML = `${data.count} comment`
                 } 
                 else {
                     document.getElementById(`posts__commentcounts_${id}`).innerHTML = `${data.count} comments`
@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (element.id.startsWith('post__')) {
             let id = element.dataset.id
             console.log(`I'm clicked ${id}`)
-            let maindiv = document.getElementById("main__header")
+            let maindiv = document.getElementById(`main__header_${id}`)
             let div = document.getElementById(`start-comment_${id}`)
             div.style.display = "block";
             maindiv.style.borderRadius = 0;

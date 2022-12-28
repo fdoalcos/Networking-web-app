@@ -2,10 +2,12 @@
 
 {% block body %}
 
-    <h2>Register</h2>
 
     {% if message %}
-        <div>{{ message }}</div>
+    <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div> -->
     {% endif %}
 
     <!-- <form action="{% url 'register' %}" method="post">
@@ -27,7 +29,7 @@
 
     Already have an account? <a href="{% url 'login' %}">Log In here.</a> -->
 
-    <div class="register__start">
+    <!-- <div class="register__start">
         <div class="register__main">
             <div class="register__box">
                 <div class="register__index">
@@ -51,5 +53,35 @@
                 <div class="register__footer">Already have an account? <a href="{% url 'login' %}">Log In here.</a></div>
             </div>
         </div>
+    </div> -->
+
+    <div class="login__start">
+        <div class="login__main">
+            <div class="login__box">
+                <div class="login__index">
+                    <img class="login__backgroundimage" id="Profile_pic" src="/static/network/logo.jpg" alt="image" width=50>
+                    <!-- <p class="login__header">Mediafluent</p> -->
+                    <p class="login__miniheader">Connect with everyone anywhere.</p>
+                    <form action="{% url 'register' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="email" name="email" placeholder="Email Address">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="password" name="password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+                        </div>
+                        <input class="login__button" type="submit" value="Register">
+                    </form>
+                </div>
+                <div class="login__footer">Already have an account? <a href="{% url 'login' %}"> Log In here.</a></div>
+            </div>
+        </div>
     </div>
+    
 {% endblock %}

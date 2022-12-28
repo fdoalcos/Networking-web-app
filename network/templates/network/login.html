@@ -4,15 +4,19 @@
 
 
     {% if message %}
-        <div>{{ message }}</div>
+    <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Error!</strong> {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div> -->
     {% endif %}
 
     <div class="login__start">
         <div class="login__main">
             <div class="login__box">
-                <img class="login__backgroundimage" id="Profile_pic" src="/static/network/emoji.jpg" alt="image" width=70>
                 <div class="login__index">
-                    <p class="login__header">Login</p>
+                    <img class="login__backgroundimage" id="Profile_pic" src="/static/network/logo.jpg" alt="image" width=50>
+                    <!-- <p class="login__header">Mediafluent</p> -->
+                    <p class="login__miniheader">Connect with everyone anywhere.</p>
                     <form action="{% url 'login' %}" method="post">
                         {% csrf_token %}
                         <div class="form-group">
@@ -24,7 +28,7 @@
                         <input class="login__button" type="submit" value="Login">
                     </form>
                 </div>
-                <div class="login__footer">Don't have an account? <a href="{% url 'register' %}">Register here.</a></div>
+                <div class="login__footer">Don't have an account? <a href="{% url 'register' %}"> Register here.</a></div>
             </div>
         </div>
     </div>

@@ -5,6 +5,10 @@
 
 
 {% block body %}
+    <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div> -->
     <div class="main_flex">
         <diV class="index__profile">
             <div>
@@ -109,7 +113,7 @@
                             </div>
                             <diV class="inbox__child">
                                 <form>
-                                    {% render_field form.Inbox class="inbox__main" placeholder="Share your thoughts" type="textarea" data-bs-toggle="modal" data-bs-target="#staticBackdrop" %}
+                                    {% render_field form.Inbox class="inbox__main" placeholder="Share your thoughts..." type="textarea" data-bs-toggle="modal" data-bs-target="#staticBackdrop" %}
                                 </form>
                             </diV>
                             
@@ -141,7 +145,7 @@
                                         {% endif %}
                                     </div>
                                     <div class="inbox__child">
-                                        {% render_field form.Inbox autofocus="autofocus" class="inbox__form"  tabindex="1" placeholder="Share your thoughts" type="textarea" %}
+                                        {% render_field form.Inbox autofocus="autofocus" class="inbox__form"  tabindex="1" placeholder="Share your thoughts..." type="textarea" %}
                                     </div>
                                     <div class="inbox__header">
                                         <p class="inbox__title">Add attachment (optional)</p>
@@ -223,7 +227,7 @@
                                 {% endif %}
                             </div>
                             <div class="post__info" >
-                                <div id="count_{{ inbox.id }}">
+                                <div class="post__count" id="count_{{ inbox.id }}">
                                     {% if inbox.count != 0 %}
                                         <img src="https://static-exp1.licdn.com/sc/h/8ekq8gho1ruaf8i7f86vd1ftt" style="width: 20px;"alt="like-image"> {{ inbox.count }}
                                     {% endif %}
@@ -248,7 +252,7 @@
                         </div>
                     </div>
                     <div class="main__headerpad">
-                        <div id="main__header" class="main__header" style="border-top-style: none;">
+                        <div id="main__header_{{ inbox.id }}" class="main__header" style="border-top-style: none;">
                             <div class="post__header">
                                 <div class="post__like">
                                     {% if request.user in inbox.liked.all %}

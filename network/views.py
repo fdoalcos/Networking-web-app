@@ -7,12 +7,16 @@ from django.urls import reverse
 from .forms import Inboxform, Commentform, Profileform, Editform
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 
 
 from django.core.paginator import Paginator
 
 from .models import User, Post, Profile, Comment
 
+@login_required(login_url='/login')
 @csrf_exempt
 def index(request):
 
@@ -45,6 +49,7 @@ def index(request):
             instance = form.save(commit=False)
             instance.users = request.user
             instance.save()
+            messages.success(request, 'Post is successfully posted!')
             return HttpResponseRedirect(reverse("index"))
             form = Inboxform()
 
@@ -79,20 +84,23 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
+            messages.success(request, 'You have been successfully logged in!')
             return HttpResponseRedirect(reverse("index"))
         else:
+            messages.error(request, "Invalid username and/or password.")
             return render(request, "network/login.html", {
                 "message": "Invalid username and/or password."
             })
     else:
         return render(request, "network/login.html")
 
-
+@login_required
 def logout_view(request):
 
     #Log out users
     logout(request)
-    return HttpResponseRedirect(reverse("index"))
+    messages.success(request, 'You have been successfully logged out!')
+    return HttpResponseRedirect(reverse("login"))
 
 
 def register(request):
@@ -105,6 +113,7 @@ def register(request):
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
         if password != confirmation:
+            messages.error(request, "Passwords must match.")
             return render(request, "network/register.html", {
                 "message": "Passwords must match."
             })
@@ -114,12 +123,14 @@ def register(request):
             user = User.objects.create_user(username, email, password)
             user.save()
         except IntegrityError:
+            messages.error(request, "Username already taken.")
             return render(request, "network/register.html", {
                 "message": "Username already taken."
             })
         profile = Profile(Users=user)
         profile.save()
         login(request, user)
+        messages.success(request, 'You have successfully registered!')
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "network/register.html")
